@@ -2,7 +2,7 @@
 require_once 'autoload.php';
 
 try{
-    App::init();
+    App::init();//выполняем метод инит
 }
 catch (PDOException $e){
     echo "DB is not available";
