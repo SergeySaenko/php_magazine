@@ -34,7 +34,7 @@ class App
             }
         }
         else{
-            $_GET['page'] = 'Index';
+            $_GET['page'] = 'Index';//иначе
         }
 
         if (isset($_GET['page'])) {
