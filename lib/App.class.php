@@ -38,7 +38,7 @@ class App
         }
 
         if (isset($_GET['page'])) {
-            $controllerName = ucfirst($_GET['page']) . 'Controller';//IndexController
+            $controllerName = ucfirst($_GET['page']) . 'Controller';//IndexController, ucfirst — Преобразует первый символ строки в верхний регистр
             $methodName = isset($_GET['action']) ? $_GET['action'] : 'index';
             $controller = new $controllerName();
             
