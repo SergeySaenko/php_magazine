@@ -118,5 +118,6 @@ abstract class Model {
             throw new Exception('Undefined type for property ' . $name);
         }
     }
+
 }
 ?>
