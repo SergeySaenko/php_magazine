@@ -1,0 +1,31 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-9">
+			<h1>ms. Decorator</h1>
+			<h3>Приветствую</h3>
+			<p>Более шести лет я создаю эксклюзивные украшения и аксессуары.</p> 
+			<p>Уверена, в моём магазине Вы найдёте произведения искусства отражающие Ваше настроение. Они дополнят Ваш образ и помогут расставить акценты, там, где Вам будет необходимо.</p>
+			
+			<p>Каталог по категориям:</p>
+			<ul>
+    		{% for category in categories %}
+    			<li>
+        		<a href="?path=categories/{{ category.id_category }}" link="{{ category.id_category }}" class="category-link">{{ category.name }}</a>
+    			</li>
+    		{% endfor %}
+			</ul>
+			<p>Если у вас возникнут вопросы, вы можете написать мне личное сообщение. На все письма без исключения отвечаю в течение дня.</p>
+			<small>
+				<p>Кроме этого магазина, мои работы можно увидеть на Ярмарке мастеров:</p>
+				<ul>
+					<li><a href="https://www.livemaster.ru/ms-decorator">Эксклюзивные украшения</a></li>
+					<li><a href="https://www.livemaster.ru/decorator-mini">Оригинальные сумочки и кошельки</a></li>
+				</ul>
+			</small>
+
+		</div>
+		<div class="col-3">
+			<img src="style/avatar.jpg" class="img-fluid" alt="ms.Decorator">
+		</div>
+	</div>
+</div>
