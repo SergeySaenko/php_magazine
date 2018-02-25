@@ -9,7 +9,7 @@ class OrderController extends Controller
             'result' => 0
         ];
 
-        $id_good = (int)$_POST['id_good'];
+        $id_good = (int)$_GET['id'];
         if($id_good > 0){
             $basket = new Basket();
             $basket->setIdGood($id_good);

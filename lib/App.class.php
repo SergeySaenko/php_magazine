@@ -9,11 +9,17 @@ class App
 
         if (php_sapi_name() !== 'cli' && isset($_SERVER) && isset($_GET)) {
             self::web(isset($_GET['path']) ? $_GET['path'] : '');
+            //self::console_log( $_GET['path'] );
         }
     }
 	
   //http://site.ru/index.php?path=news/edit/5
-	
+    public function console_log( $data ){
+      echo '<script>';
+      echo 'console.log('. json_encode( $data ) .')';
+      echo '</script>';
+    }
+    
 
 	
 
@@ -45,7 +51,9 @@ class App
             $data = [
                 'content_data' => $controller->$methodName($_GET),
                 'title' => $controller->title,
-                'categories' => Category::getCategories(0)
+                'categories' => Category::getCategories(0),
+                'header' => Page::getHeader(),
+                'footer' => Page::getFooter()
             ];
 
             $view = $controller->view . '/' . $methodName . '.html';

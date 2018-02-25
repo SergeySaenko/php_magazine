@@ -4,25 +4,27 @@
     <title>{{ title }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script type="text/javascript" src="/js/main.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <!--<script type="text/javascript" src="../public/js/jquery.js"></script>-->
+    <script type="text/javascript" src="../public/js/main.js"></script>
     <script type="text/javascript" src="/js/category.js"></script>
   </head>
   <body>
-    <div class="container-fluid background">
+    <div class="container-fluid">
       <div class="container">
-        <ul>
-            {% for category in categories %}
-            <li>
-                <a href="/categories/?id={{ category.id_category }}" link="{{ category.id_category }}" class="category-link">{{ category.name }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-
-        <div>
-            <a href="/user/">Личный кабинет</a>
-        </div>
-
+        <nav class="navbar sticky-top navbar-toggleable-md navbar-light bg-faded">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="#">ms. Decorator</a>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="navbar-nav">
+              {% for page in header %}
+                <a class="nav-item nav-link" href="{{ page.url }}" link="page_{{ page.id }}">{{ page.name }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </nav>
+        
 
 

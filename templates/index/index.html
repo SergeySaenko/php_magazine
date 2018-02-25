@@ -1,3 +1,10 @@
 {% include 'header.html' %}
+<ul>
+    {% for category in categories %}
+    <li>
+        <a href="?path=categories/{{ category.id_category }}" link="{{ category.id_category }}" class="category-link">{{ category.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
 hello, people!
 {% include 'footer.html' %}
