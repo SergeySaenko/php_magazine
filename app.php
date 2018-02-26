@@ -1,5 +1,6 @@
 <?php
 require_once 'autoload.php';
+session_start();
 
 try{
     App::init();//выполняем метод инит

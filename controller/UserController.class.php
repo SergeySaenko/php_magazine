@@ -2,8 +2,12 @@
 
 class UserController extends Controller
 {
-    function index(){
+  public $view = 'user';
+  public $title;
 
+	function __construct()
+    {
+      parent::__construct();
+      $this->title .= ' | Личный кабинет';
     }
-
 }
