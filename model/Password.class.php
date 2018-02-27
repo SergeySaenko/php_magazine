@@ -2,7 +2,7 @@
 
 class Password
 {
-    const SALT_TEXT = 'Some salt!';
+    const SALT_TEXT = 'Another salt!';
 
     private $password;
     private $hashedPassword;
