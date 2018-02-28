@@ -10,7 +10,7 @@
 	  	$this->password = isset($data['password']) ? $data['password'] : null ;
 		}
 
-		public function validate()
+    public function validate()
 		{
 	  	return !empty($this->username) && !empty($this->password);
 		}
@@ -19,7 +19,6 @@
     {
     	return $this->username;
     }
-
 
     public function setUsername($username)
     {
