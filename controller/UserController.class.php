@@ -5,12 +5,13 @@ class UserController extends Controller
   public $view = 'user';
   public $title;
   public $msg = '';
-  public $form = new LoginForm($_POST);
+  public $form;// = new LoginForm($_POST);
 
 	function __construct()
     {
       parent::__construct();
       $this->title .= ' | Личный кабинет';
+      $this->form = new LoginForm($_POST);
     }
 
 	public function login($form)
