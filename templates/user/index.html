@@ -1,0 +1,25 @@
+{% include 'header.html' %}
+<div id="user-login">
+  <h2>Login</h2>
+  <b><?=$msg; ?></b>
+  <br/>
+  <form method="post">
+    Username: <input type="text" name="username" value="<?=$form->getUsername(); ?>"/> <br/><br/>
+    Password: <input type="password" name="password"/> <br/><br/>
+    <input type="submit"/>
+  </form>
+</div>
+<hr/>
+<div id="user-registration">
+  <h2>Register new user</h2>
+  <b><?=$msg; ?></b>
+  <br/>
+  <form method="post">
+    Email: <input type="email" name="email" value="<?=$form->getEmail(); ?>"/> <br/><br/>
+    Username: <input type="text" name="username" value="<?=$form->getUsername(); ?>"/> <br/><br/>
+    Password: <input type="password" name="password"/> <br/><br/>
+    Confirm password: <input type="password" name="passwordConfirm"/> <br/><br/>
+    <input type="submit"/>
+  </form>
+</div>
+{% include 'footer.html' %}
