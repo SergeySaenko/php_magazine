@@ -1,30 +1,25 @@
 {% include 'header.html' %}
-<div id="registerBox">
-  <div class="menuCaption showHidden" onclick="showregisterBox();">Регистрация</div>
-  <div id="registerBoxHidden">
-      <h2>Регистрация</h2>
-    <b>{{ msg }}</b>
-    <br/>
-    <form>
-      Email: <input type="email" id="email" name="email" value=""/> <br/><br/>
-      <!--Username: <input type="text" name="username"/> <br/><br/>-->
-      Пароль: <input type="password" id="pwd1" name="pwd1" value=""/> <br/><br/>
-      Повторить пароль: <input type="password" id="pwd2" name="pwd2" value=""/> <br/><br/>
-      <input type="button" id="registerMe" value="Зарегистрироваться"/>
-    </form>
-  </div>
-
-</div>
 <div id="user-login">
   <h2>Login</h2>
-  <b>{{ msg }}</b>
+  <b><?=$msg; ?></b>
   <br/>
-  <form method="post" action="user/login">
-    Username: <input type="text" name="username" value="{{ user }}"/> <br/><br/>
+  <form method="post">
+    Username: <input type="text" name="username" value="<?=$form->getUsername(); ?>"/> <br/><br/>
     Password: <input type="password" name="password"/> <br/><br/>
     <input type="submit"/>
   </form>
 </div>
 <hr/>
-
+<div id="user-registration">
+  <h2>Register new user</h2>
+  <b><?=$msg; ?></b>
+  <br/>
+  <form method="post">
+    Email: <input type="email" name="email" value="<?=$form->getEmail(); ?>"/> <br/><br/>
+    Username: <input type="text" name="username" value="<?=$form->getUsername(); ?>"/> <br/><br/>
+    Password: <input type="password" name="password"/> <br/><br/>
+    Confirm password: <input type="password" name="passwordConfirm"/> <br/><br/>
+    <input type="submit"/>
+  </form>
+</div>
 {% include 'footer.html' %}
