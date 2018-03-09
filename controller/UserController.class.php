@@ -5,7 +5,7 @@ class UserController extends Controller
   public $view = 'user';
   public $title;
   public $msg = '';
-  public $form;// = new LoginForm($_POST);
+  public $form;
 
 	function __construct()
     {

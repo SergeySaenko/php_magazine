@@ -1,16 +1,17 @@
 {% include 'header.html' %}
-<div id="user-login">
-  <h2>Форма входа</h2>
+<div id="user-registration">
+  <h2>Форма регистрации</h2>
   <b><?=$msg; ?></b>
   <br/>
   <form method="post">
     Эл.почта: <input type="email" name="email" value=""/> <br/><br/>
     Пароль: <input type="password" name="password"/> <br/><br/>
+    Повторите пароль: <input type="password" name="passwordConfirm"/> <br/><br/>
     <input type="submit"/>
   </form>
 </div>
 <br/>
-<a href="?path=user/register">Зарегистрироваться</a>
+<a href="?path=user/index">Войти</a>
 <br/>
 <hr/>
 {% include '/user/advantages.html' %}

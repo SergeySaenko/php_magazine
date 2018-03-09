@@ -18,14 +18,14 @@ class Page extends Model {
 
     public static function getHeader($admin = 0, $footer = 0)
     {
-        return db::getInstance()->Select(
+        return SQL::Instance()->Select(
             'SELECT * FROM pages WHERE status = :status AND admin = :admin AND footer = :footer',
             ['status' => Status::Active, 'admin' => $admin, 'footer' => $footer]);
     }
 
     public static function getFooter($admin = 0, $footer = 1)
     {
-        return db::getInstance()->Select(
+        return SQL::Instance()->Select(
             'SELECT * FROM pages WHERE status = :status AND admin = :admin AND footer = :footer',
             ['status' => Status::Active, 'admin' => $admin, 'footer' => $footer]);
     }
