@@ -10,14 +10,13 @@ class RegistrationForm
     function __construct(Array $data)
     {
         $this->email = isset($data['email']) ? $data['email'] : null;
-        $this->username = isset($data['username']) ? $data['username'] : null;
         $this->password = isset($data['password']) ? $data['password'] : null;
         $this->passwordConfirm = isset($data['passwordConfirm']) ? $data['passwordConfirm'] : null;
     }
 
     public function validate()
     {
-        return !empty($this->email) && !empty($this->username) && !empty($this->password) && !empty($this->passwordConfirm) && $this->passwordsMatch();
+        return !empty($this->email) && !empty($this->password) && !empty($this->passwordConfirm) && $this->passwordsMatch();
     }
 
     public function passwordsMatch()
@@ -53,15 +52,5 @@ class RegistrationForm
     public function setPassword($password)
     {
         $this->password = $password;
-    }
-
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    public function setUsername($username)
-    {
-        $this->username = $username;
     }
 } 

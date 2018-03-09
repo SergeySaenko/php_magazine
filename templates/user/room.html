@@ -1,0 +1,40 @@
+{% include 'header.html' %}
+<div id="user-room">
+  <h2>Личный кабинет</h2>
+  <br/>
+  <b>{{ msg }}</b>
+  <br/>
+  
+  <form method="post">
+    <fieldset>
+      <legend>Форма редактирования личных данных</legend>
+      Имя: <input type="text" name="name" value=""/> <br/><br/>
+      Эл.почта: <input type="email" name="email" value=""/> <br/><br/>
+      Телефон: <input type="tel" name="phone" value=""/> <br/><br/>
+      Адрес: <br/><textarea rows="3" cols="50" name="address"></textarea> <br/><br/>
+      Пароль: <input type="password" name="password"/> <br/><br/>
+      Повторите пароль: <input type="password" name="passwordConfirm"/> <br/><br/>
+      <input type="submit"/>
+    </fieldset>
+  </form>
+  <br/>
+  <hr/>
+  <h3>Мои заказы</h3>
+  <br/>
+  <br/>
+  <hr/>
+  <h3>История просмотров</h3>
+  <br/>
+  <br/>
+  <hr/>
+  <h3>Мне нравится</h3>
+  <br/>
+  <br/>
+  <hr/>
+  <h3>Мои отзывы</h3>
+  <br/>
+  <br/>
+  <hr/>
+</div>
+<br/>
+{% include 'footer.html' %}

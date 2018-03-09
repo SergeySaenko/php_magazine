@@ -1,28 +1,28 @@
 <?php 
 	class LoginForm
 	{
-	  private $username;
+	  private $email;
 	  private $password;
 
 	  public function __construct(Array $data)
 		{
-	  	$this->username = isset($data['username']) ? $data['username'] : null ;
+	  	$this->email = isset($data['email']) ? $data['email'] : null ;
 	  	$this->password = isset($data['password']) ? $data['password'] : null ;
 		}
 
     public function validate()
 		{
-	  	return !empty($this->username) && !empty($this->password);
+	  	return !empty($this->email) && !empty($this->password);
 		}
 
-		public function getUsername()
+		public function getEmail()
     {
-    	return $this->username;
+    	return $this->email;
     }
 
-    public function setUsername($username)
+    public function setEmail($email)
     {
-      $this->username = $username;
+      $this->email = $email;
     }
 
     public function getPassword()

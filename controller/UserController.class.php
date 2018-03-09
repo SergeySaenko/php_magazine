@@ -11,28 +11,65 @@ class UserController extends Controller
     {
       parent::__construct();
       $this->title .= ' | Личный кабинет';
-      $this->form = new LoginForm($_POST);
     }
 
-	public function login($form)
+	public function index()
 	{
-	    if ($form->validate()) {
-	        $username = $form->getUsername();
-	        $password = new Password( $form->getPassword() );
+	  if($_POST) { 
+      $this->form = new LoginForm($_POST);
+	    if ( $this->form->validate() ) {
+	        $email = strip_tags( $this->form->getEmail() );
+	        $password = new Password( strip_tags( $this->form->getPassword() ) );
 
-	        $res = User::loginUser($form);
+	        $res = User::loginUser($email, $password);
 	        if (!$res) {
-	            $msg = 'No such user found';
+	            return $msg = 'Нет такого пользователя';
 	        } else {
 	            $user = $res[0]['username'];
-	            Session::set('user', $user);
-	            $msg = 'You have been logged in';
-	            //header('location: index.php?msg=You have been logged in');
+	            Session::set('user', $email);
+	            $msg = 'Вы вошли';
+	            header('location: ?path=user/room');
 	        }
 
 	    } else {
-	        $msg = 'Please fill in fields';
+	        $msg = 'Пожалуйста, заполните все поля.';
 	    }
+	    echo $msg;
+	  }  
+	}
+  
+	public function register()
+	{
+		if($_POST) {
+	    $this->form = new RegistrationForm($_POST);
+	    if ( $this->form->validate() ) {
+	      $email = strip_tags( $this->form->getEmail() );
+	      $password = new Password( strip_tags( $this->form->getPassword() ) );
+
+	      $searchUser = User::searchUser($email);
+	        if(isset($searchUser[0]['email'])){
+	    			$z = $searchUser[0]['email'];
+	    			$msg = "Пользователь с такой эл. почтой $z уже существует";
+					}else{
+	      		$regUserObj = User::registerUser($email, $password);
+
+	      		if($regUserObj){
+	      			Session::set('user', $email);
+	      			$_SESSION['login'] = $email;
+	      			$msg = 'Вы зарегистрировались и вошли';
+	        		header('location: ?path=user/room');
+	        	}	 
+	    		}
+	    } else {
+	      $msg = 'Please fill in fields';
+	    }
+	    echo $msg;
+    }
+	}
+
+	public function room($data)
+	{
+		return [];
 	}
 	
 }

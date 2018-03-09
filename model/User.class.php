@@ -25,12 +25,25 @@ class User extends Model {
     ];
   }
 
-  public static function loginUser($username, $password)
+  public static function loginUser($email, $password)
   {
-    return db::getInstance()->Select(
-      'SELECT * FROM users WHERE user_login=:username AND user_password = :password LIMIT 1',
-      ['username' => $username, 'password' => $password]);
-    }
+    return SQL::Instance()->Select(
+      'SELECT * FROM users WHERE email=:email AND pwd = :password LIMIT 1',
+      ['email' => $email, 'password' => $password]);
+  }
+
+  public static function registerUser($email, $password)
+  {
+    return SQL::Instance()->Insert(
+      'users', ['email'=>$email, 'pwd'=>$password, 'role'=>'2']);
+  }
+
+  public static function searchUser($email)
+  {
+    return SQL::Instance()->Select(
+      'SELECT * FROM users WHERE email=:email',
+      ['email' => $email]);
+  }
 
 }
 ?>
