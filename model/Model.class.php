@@ -69,7 +69,7 @@ abstract class Model {
 
         }
         $query .= ' PRIMARY KEY (`id`))';
-        db::getInstance()->Query($query);
+        SQL::Instance()->Query($query);
         return true;
     }
 
@@ -106,7 +106,7 @@ abstract class Model {
 
     protected final static function tableExists()
     {
-        return count(db::getInstance()->select('SHOW TABLES LIKE "' . static::$table . '"')) > 0;
+        return count(SQL::Instance()->Select('SHOW TABLES LIKE "' . static::$table . '"')) > 0;
     }
 
     protected final function checkProperty($name)

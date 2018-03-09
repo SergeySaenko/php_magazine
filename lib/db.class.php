@@ -1,5 +1,5 @@
 <?php
-class db
+class db1
 {
     private static $_instance = null;
 
@@ -11,7 +11,7 @@ class db
     public static function getInstance()
     {
         if (self::$_instance == null) {
-            self::$_instance = new db();
+            self::$_instance = new db1();
         }
         return self::$_instance;
     }

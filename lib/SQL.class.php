@@ -19,9 +19,9 @@ class SQL{
 		$this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 	}
 	
-	public function Select($query){
+	public function Select($query, $params = array()){
 		$q = $this->db->prepare($query);
-		$q->execute();
+		$q->execute($params);
 		
 		if($q->errorCode() != PDO::ERR_NONE){
 			$info = $q->errorInfo();
@@ -100,5 +100,15 @@ class SQL{
 		
 		return $q->rowCount();
 	}
+
+   /*
+   * Выполнить запрос к БД
+   */
+  public function Query($query, $params = array())
+  {
+      $res = $this->db->prepare($query);
+      $res->execute($params);
+      return $res;
+  }
 }
 ?>

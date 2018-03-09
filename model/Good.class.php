@@ -29,19 +29,19 @@ class Good extends Model {
 
     public static function getGoods($categoryId)
     {
-        return db::getInstance()->Select(
+        return SQL::Instance()->Select(
             'SELECT id_good, id_category, `name`, price FROM goods WHERE id_category = :category AND status=:status',
             ['status' => Status::Active, 'category' => $categoryId]);
     }
 
     public function getGoodInfo(){
-        return db::getInstance()->Select(
+        return SQL::Instance()->Select(
             'SELECT * FROM goods WHERE id_good = :id_good',
             ['id_good' => (int)$this->id_good]);
     }
 
     public static function getGoodPrice($id_good){
-        $result = db::getInstance()->Select(
+        $result = SQL::Instance()->Select(
             'SELECT price FROM goods WHERE id_good = :id_good',
             ['id_good' => $id_good]);
 

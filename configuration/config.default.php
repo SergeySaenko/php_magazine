@@ -1,10 +1,13 @@
 <?php
-$config['db_user'] = 'root';
-$config['db_password'] = '';
-$config['db_base'] = 'test2';
-$config['db_host'] = 'localhost';
-$config['db_charset'] = 'UTF-8';
 
+//define('ROOT', '/my_shop/');
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'test2');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
+define('DB_CONNECT', 'mysql:host='. DB_HOST . ';dbname=' . DB_NAME);
+
+$config['db_charset'] = 'UTF-8';
 $config['path_root'] = __DIR__;
 $config['path_public'] = $config['path_root'] . '/../public';
 $config['path_model'] = $config['path_root'] . '/../model';
