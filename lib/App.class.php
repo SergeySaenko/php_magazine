@@ -52,7 +52,7 @@ class App
                 'content_data' => $controller->$methodName($_GET),
                 'title' => $controller->title,
                 'msg' => $controller->msg,
-                'categories' => Category::getCategories(0),
+                //'categories' => Category::getCategories(0),
                 'header' => Page::getHeader(),
                 'footer' => Page::getFooter()
             ];

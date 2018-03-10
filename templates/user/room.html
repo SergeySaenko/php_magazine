@@ -8,10 +8,10 @@
   <form method="post">
     <fieldset>
       <legend>Форма редактирования личных данных</legend>
-      Имя: <input type="text" name="name" value=""/> <br/><br/>
-      Эл.почта: <input type="email" name="email" value=""/> <br/><br/>
-      Телефон: <input type="tel" name="phone" value=""/> <br/><br/>
-      Адрес: <br/><textarea rows="3" cols="50" name="address"></textarea> <br/><br/>
+      Имя: <input type="text" name="name" value="{{ content_data.name }}"/> <br/><br/>
+      Эл.почта: <input type="email" name="email" value="{{ content_data.email }}"/> <br/><br/>
+      Телефон: <input type="tel" name="phone" value="{{ content_data.phone }}"/> <br/><br/>
+      Адрес: <br/><textarea rows="3" cols="50" name="address">{{ content_data.address }}</textarea> <br/><br/>
       Пароль: <input type="password" name="password"/> <br/><br/>
       Повторите пароль: <input type="password" name="passwordConfirm"/> <br/><br/>
       <input type="submit"/>

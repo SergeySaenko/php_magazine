@@ -25,8 +25,16 @@ class UserController extends Controller
 	        if (!$res) {
 	            return $msg = 'Нет такого пользователя';
 	        } else {
-	            $user = $res[0]['username'];
-	            Session::set('user', $email);
+	            $user = $res[0]['name'] ? $res[0]['name'] : null;
+	            $email = $res[0]['email'];
+	            $role = $res[0]['role'];
+	            $phone = $res[0]['phone'] ? $res[0]['phone'] : null;
+	            $address = $res[0]['address'] ? $res[0]['address'] : null;
+	            Session::set('user', $user);
+	            Session::set('email', $email);
+	            Session::set('role', $role);
+	            Session::set('phone', $phone);
+	            Session::set('address', $address);
 	            $msg = 'Вы вошли';
 	            header('location: ?path=user/room');
 	        }
@@ -69,7 +77,12 @@ class UserController extends Controller
 
 	public function room($data)
 	{
-		return [];
+		$user = Session::get('user');
+    $email = Session::get('email');
+    $role = Session::get('role');
+    $phone = Session::get('phone');
+    $address = Session::get('address'); 
+		return ['user' =>$user, 'email' =>$email, 'role' =>$role, 'phone' =>$phone, 'address' =>$address];
 	}
 	
 }
