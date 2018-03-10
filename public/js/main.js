@@ -14,4 +14,7 @@ $(document).ready(function(){
       dataType : "text"
     })
   });
+
+  var value = @Request.RequestContext.HttpContext.Session["user"];
+  console.log( value );
 });
