@@ -15,6 +15,5 @@ $(document).ready(function(){
     })
   });
 
-  var value = @Request.RequestContext.HttpContext.Session["user"];
-  console.log( value );
+
 });
