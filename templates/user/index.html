@@ -5,7 +5,8 @@
   <b>{{ msg }}</b>
   <br/>
   <form method="post">
-    Эл.почта: <input type="email" name="email" value=""/> <br/><br/>
+    Эл.почта: <input type="email" name="email" value=""/> <br/><br/>    
+    <input type="hidden" name="name" value="{{ user }}" id="user"/>
     Пароль: <input type="password" name="password"/> <br/><br/>
     <input type="submit"/>
   </form>

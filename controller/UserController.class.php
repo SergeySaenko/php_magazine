@@ -14,8 +14,16 @@ class UserController extends Controller
     }
 
 	public function index()
-	{
+{		
+		Session::delete('user_id');
+		Session::delete('user');
+	  Session::delete('email');
+	  Session::delete('role');
+	  Session::delete('phone');
+	  Session::delete('address');
+
 	  if($_POST) { 
+
       $this->form = new LoginForm($_POST);
 	    if ( $this->form->validate() ) {
 	        $email = strip_tags( $this->form->getEmail() );
@@ -31,7 +39,7 @@ class UserController extends Controller
 	            $role = $res[0]['role'];
 	            $phone = $res[0]['phone'] ? $res[0]['phone'] : null;
 	            $address = $res[0]['address'] ? $res[0]['address'] : null;
-	            Session::set('id', $user_id);
+	            Session::set('user_id', $user_id);
 	            Session::set('user', $user);
 	            Session::set('email', $email);
 	            Session::set('role', $role);
@@ -49,7 +57,14 @@ class UserController extends Controller
 	}
   
 	public function register()
-	{
+	{	
+		Session::delete('user_id');
+		Session::delete('user');
+    Session::delete('email');
+    Session::delete('role');
+    Session::delete('phone');
+    Session::delete('address');
+
 		if($_POST) {
 	    $this->form = new RegistrationForm($_POST);
 	    if ( $this->form->validate() ) {
@@ -64,14 +79,29 @@ class UserController extends Controller
 	      		$regUserObj = User::registerUser($email, $password);
 
 	      		if($regUserObj){
-	      			Session::set('user', $email);
-	      			$_SESSION['login'] = $email;
-	      			$msg = 'Вы зарегистрировались и вошли';
-	        		header('location: ?path=user/room');
+	      			$res = User::searchUser($email);
+	      			if (!$res) {
+	            	return $msg = 'Что-то пошло не так';
+	        		} else {
+	        			$user = $res[0]['name'] ? $res[0]['name'] : null;
+	            	$email = $res[0]['email'];
+	            	$user_id = $res[0]['id_user'];
+	            	$role = $res[0]['role'];
+	            	$phone = $res[0]['phone'] ? $res[0]['phone'] : null;
+	            	$address = $res[0]['address'] ? $res[0]['address'] : null;
+	            	Session::set('user_id', $user_id);
+	            	Session::set('user', $user);
+	            	Session::set('email', $email);
+	            	Session::set('role', $role);
+	            	Session::set('phone', $phone);
+	            	Session::set('address', $address);
+	            	$msg = 'Вы зарегистрировались и вошли';
+	            	header('location: ?path=user/room');
+	        		}
 	        	}	 
 	    		}
 	    } else {
-	      $msg = 'Please fill in fields';
+	      $msg = 'Заполните все поля';
 	    }
 	    echo $msg;
     }
@@ -79,6 +109,7 @@ class UserController extends Controller
 
 	public function room($data)
 	{
+		$user_id = Session::get('user_id');
 		$user = Session::get('user');
     $email = Session::get('email');
     $role = Session::get('role');

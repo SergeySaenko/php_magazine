@@ -22,7 +22,8 @@
               {% for page in header %}
                 <a class="nav-item nav-link" href="{{ page.url }}" link="page_{{ page.id }}">{{ page.name }}</a>
               {% endfor %}
-                <a class="nav-item nav-link" href="?path=user/room">{{ user }}</a>
+                <a class="nav-item nav-link" href="?path=user/room" id="login"></a>
+                <a class="nav-item nav-link" href="#" id="logout"></a>
             </div>
           </div>
         </nav>

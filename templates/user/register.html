@@ -6,7 +6,8 @@
   <br/>
   <form method="post">
     Эл.почта: <input type="email" name="email" value=""/> <br/><br/>
-    Пароль: <input type="password" name="password"/> <br/><br/>
+    <input type="hidden" name="name" value="{{ user }}" id="user"/>
+    Пароль: <input type="password" name="password"/> <br/><br/> 
     Повторите пароль: <input type="password" name="passwordConfirm"/> <br/><br/>
     <input type="submit"/>
   </form>

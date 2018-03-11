@@ -48,13 +48,11 @@ class App
             $methodName = isset($_GET['action']) ? $_GET['action'] : 'index';
             $controller = new $controllerName();
             $user = Session::has('user') ? Session::get('user') : (Session::has('email') ? Session::get('email') : null);
-            $user = $user ? "Личный кабинет ".$user : null;
             
             $data = [
                 'content_data' => $controller->$methodName($_GET),
                 'title' => $controller->title,
                 'msg' => $controller->msg,
-                //'categories' => Category::getCategories(0),
                 'user' => $user,
                 'header' => Page::getHeader(),
                 'footer' => Page::getFooter()
