@@ -48,14 +48,16 @@ class App
             $methodName = isset($_GET['action']) ? $_GET['action'] : 'index';
             $controller = new $controllerName();
             $user = Session::has('user') ? Session::get('user') : (Session::has('email') ? Session::get('email') : null);
+            $role = Session::has('role') ? Session::get('role') : 2;
             
             $data = [
                 'content_data' => $controller->$methodName($_GET),
                 'title' => $controller->title,
                 'msg' => $controller->msg,
                 'user' => $user,
-                'header' => Page::getHeader(),
-                'footer' => Page::getFooter()
+                'role' => $role,
+                'header' => Page::getHeader($role),
+                'footer' => Page::getFooter($role)
             ];
 
             $view = $controller->view . '/' . $methodName . '.html';

@@ -29,6 +29,6 @@ $(document).ready(function(){
     $('#login').hide();
     $('a[link="page_6"]').show();
     location.href = "?path=user/index";
-  })
+  });
 
 });

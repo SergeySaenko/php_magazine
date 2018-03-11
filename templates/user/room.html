@@ -21,6 +21,25 @@
   <br/>
   <hr/>
   <h3>Мои заказы</h3>
+    <table border="1">
+      <tr>
+        <th>Номер</th>
+        <th>Сумма</th>
+        <th>Дата</th>
+        <th>Статус</th>
+      </tr>
+      {% for order, orders in content_data %}
+        {% for order in orders%}
+          <tr>
+            <td>{{ order.id_order }}</td>
+            <td><a href="?path=orders/{{ order.id_order }}/" link="{{ order.id_order }}" class="order-link">{{ order.amount }}</a></td>
+            <td>{{ order.datetime_create }}</td>
+            <td>{{ order.order_status_name }}</td>
+          </tr>
+        {% endfor %}
+      {% endfor %}
+    </table>
+
   <br/>
   <br/>
   <hr/>

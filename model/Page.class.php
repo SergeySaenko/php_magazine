@@ -16,17 +16,17 @@ class Page extends Model {
         ];
     }
 
-    public static function getHeader($admin = 0, $footer = 0)
+    public static function getHeader($admin = 2)
     {
         return SQL::Instance()->Select(
-            'SELECT * FROM pages WHERE status = :status AND admin = :admin AND footer = :footer',
-            ['status' => Status::Active, 'admin' => $admin, 'footer' => $footer]);
+            'SELECT * FROM pages WHERE status = :status AND admin = :admin AND footer = 0',
+            ['status' => Status::Active, 'admin' => $admin]);
     }
 
-    public static function getFooter($admin = 0, $footer = 1)
+    public static function getFooter($admin = 2, $footer = 1)
     {
         return SQL::Instance()->Select(
-            'SELECT * FROM pages WHERE status = :status AND admin = :admin AND footer = :footer',
-            ['status' => Status::Active, 'admin' => $admin, 'footer' => $footer]);
+            'SELECT * FROM pages WHERE status = :status AND admin = :admin AND footer = 1',
+            ['status' => Status::Active, 'admin' => $admin]);
     }
 }

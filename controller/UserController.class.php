@@ -114,8 +114,14 @@ class UserController extends Controller
     $email = Session::get('email');
     $role = Session::get('role');
     $phone = Session::get('phone');
-    $address = Session::get('address'); 
-		return ['user' =>$user, 'email' =>$email, 'role' =>$role, 'phone' =>$phone, 'address' =>$address];
+    $address = Session::get('address');
+    if($user_id) {
+    	$order = Order::getOrders($user_id);
+    	return ['user' =>$user, 'email' =>$email, 'role' =>$role, 'phone' =>$phone, 'address' =>$address, 'order' =>$order];
+    } else {
+    	header('location: ?path=user/index');
+    }
+		
 	}
 	
 }
