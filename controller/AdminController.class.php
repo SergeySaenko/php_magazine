@@ -51,7 +51,7 @@ class AdminController extends Controller
                 }
 
                 $query .= ' (' . implode(',', $keys) . ') VALUES ( ' . implode(',', $values) . ')';
-                db::getInstance()->Query($query);
+                SQL::Instance()->Query($query);
                 break;
             case 'save':
                 $query = 'UPDATE ' . $data['id'] . ' SET ';
@@ -60,14 +60,14 @@ class AdminController extends Controller
                 }
                 $query = substr($query, 0, -1) . ' WHERE id = :id';
 
-                db::getInstance()->Query($query, ['id' => $actionId['id']]);
+                SQL::Instance()->Query($query, ['id' => $actionId['id']]);
                 break;
             case 'delete':
-                db::getInstance()->Query('UPDATE ' . $data['id'] . ' SET status=:status WHERE id = :id', ['id' => $actionId['id'], 'status' => Status::Deleted]);
+                SQL::Instance()->Query('UPDATE ' . $data['id'] . ' SET status=:status WHERE id = :id', ['id' => $actionId['id'], 'status' => Status::Deleted]);
                 break;
         }
-        $fields = db::getInstance()->Select('desc ' . $data['id']);
-        $_items = db::getInstance()->Select('select * from ' . $data['id']);
+        $fields = SQL::Instance()->Select('desc ' . $data['id']);
+        $_items = SQL::Instance()->Select('select * from ' . $data['id']);
         $items = [];
         foreach ($_items as $item) {
             $tmp = new $this->controls[$data['id']]($item);
@@ -96,5 +96,19 @@ class AdminController extends Controller
             }
         }
         return ['id' => $id, 'action' => $action];
+    }
+
+    public function orders()
+    {
+      //$user = Session::get('user');
+      //$role = Session::get('role');
+      //print_r($role);
+      //if($role = 0) {
+        $order = Order::getAllOrders();
+
+        return ['order' =>$order];
+      //} else {
+        //header('location: ?path=user/index');
+      //}
     }
 }

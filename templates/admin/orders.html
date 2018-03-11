@@ -1,0 +1,26 @@
+{% include 'header.html' %}
+<div id="admin-orders">
+  <h2>Заказы</h2><br/><br/>
+  <input type="hidden" name="name" value="{{ user }}" id="user"/>
+  <table border="1">
+    <tr>
+      <th>Номер</th>
+      <th>Сумма</th>
+      <th>Дата</th>
+      <th>Статус</th>
+    </tr>
+    {% for order, orders in content_data %}
+      {% for order in orders%}
+        <tr>
+          <td>{{ order.id_order }}</td>
+          <td>{{ order.amount }}</td>
+          <td>{{ order.datetime_create }}</td>
+          <td>{{ order.order_status_name }}</td>
+        </tr>
+      {% endfor %}
+    {% endfor %}
+  </table>
+  <br/>
+  <br/>
+</div>
+{% include 'footer.html' %}
