@@ -25,11 +25,13 @@ class UserController extends Controller
 	        if (!$res) {
 	            return $msg = 'Нет такого пользователя';
 	        } else {
-	            $user = $res[0]['name'] ? $res[0]['name'] : null;
+	        		$user = $res[0]['name'] ? $res[0]['name'] : null;
 	            $email = $res[0]['email'];
+	            $user_id = $res[0]['id_user'];
 	            $role = $res[0]['role'];
 	            $phone = $res[0]['phone'] ? $res[0]['phone'] : null;
 	            $address = $res[0]['address'] ? $res[0]['address'] : null;
+	            Session::set('id', $user_id);
 	            Session::set('user', $user);
 	            Session::set('email', $email);
 	            Session::set('role', $role);

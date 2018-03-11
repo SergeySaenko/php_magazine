@@ -8,10 +8,12 @@
 			
 			<p>Каталог по категориям:</p>
 			<ul>
-    		{% for category in categories %}
-    			<li>
-        		<a href="?path=categories/{{ category.id_category }}" link="{{ category.id_category }}" class="category-link">{{ category.name }}</a>
-    			</li>
+    		{% for category, categories in content_data %}
+    			{% for category in categories%}
+	    			<li>
+	        		<a href="?path=categories/{{ category.id_category }}" link="{{ category.id_category }}" class="category-link">{{ category.name }}</a>
+	    			</li>
+    			{% endfor %}
     		{% endfor %}
 			</ul>
 			<p>Если у вас возникнут вопросы, вы можете написать мне личное сообщение. На все письма без исключения отвечаю в течение дня.</p>

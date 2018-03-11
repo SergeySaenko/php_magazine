@@ -47,7 +47,8 @@ class App
             $controllerName = ucfirst($_GET['page']) . 'Controller';//IndexController, ucfirst — Преобразует первый символ строки в верхний регистр
             $methodName = isset($_GET['action']) ? $_GET['action'] : 'index';
             $controller = new $controllerName();
-            $user = Session::has('email') ? Session::has('name') ? Session::get('name') : Session::get('email') : null;
+            $user = Session::has('user') ? Session::get('user') : (Session::has('email') ? Session::get('email') : null);
+            $user = $user ? "Личный кабинет ".$user : null;
             
             $data = [
                 'content_data' => $controller->$methodName($_GET),

@@ -13,8 +13,8 @@ class IndexController extends Controller
 
   public function index($data)
   {
-    $categories = Category::getCategories(0);
-    return ['categories' => $categories];
+    $category = Category::getCategories(0);
+    return ['category' => $category];
   }
 
 }
