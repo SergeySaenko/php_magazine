@@ -15,13 +15,6 @@ class UserController extends Controller
 
 	public function login()
 {		
-		/*Session::delete('user_id');
-		Session::delete('user');
-	  Session::delete('email');
-	  Session::delete('role');
-	  Session::delete('phone');
-	  Session::delete('address');*/
-
 	  if($_POST) { 
 
       $this->form = new LoginForm($_POST);
@@ -58,12 +51,6 @@ class UserController extends Controller
   
 	public function register()
 	{	
-		/*Session::delete('user_id');
-		Session::delete('user');
-    Session::delete('email');
-    Session::delete('role');
-    Session::delete('phone');
-    Session::delete('address');*/
 
 		if($_POST) {
 	    $this->form = new RegistrationForm($_POST);
@@ -134,7 +121,6 @@ class UserController extends Controller
 	  Session::delete('role');
 	  Session::delete('phone');
 	  Session::delete('address');
-    //header('location: ?path=user/login');
     $this->title .= ' | Пока!';
 		$msg = 'Вы вышли!';
     return [ 'msg' => $msg ];   
