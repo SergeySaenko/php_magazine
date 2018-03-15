@@ -22,8 +22,12 @@
               {% for page in header %}
                 <a class="nav-item nav-link" href="{{ page.url }}" link="page_{{ page.id }}">{{ page.name }}</a>
               {% endfor %}
-                <a class="nav-item nav-link" href="?path=user/room" id="login" data="{{ user }}"></a>
-                <a class="nav-item nav-link" href="#" id="logout"></a>
+              {% if user != "" %}
+                <a class="nav-item nav-link" href="?path=user/index" id="login" data="{{ user }}">Личный кабинет {{ user }}</a>
+                <a class="nav-item nav-link" href="?path=user/logout" id="logout">Выход</a>
+              {% else %}
+                <a class="nav-item nav-link" href="?path=user/index" id="login" data="{{ user }}">Личный кабинет</a>
+              {% endif %}
             </div>
           </div>
         </nav>

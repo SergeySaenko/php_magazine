@@ -15,20 +15,20 @@ $(document).ready(function(){
     })
   });
 
-  if( $("#user").val() ) {
+  /*if( $("#user").val() ) {
     $('a[link="page_6"]').hide();
     var user = "Личный кабинет "+$("#user").val();
     var logout = "Выход";
     $('#login').text(user);
     $('#logout').text(logout);
-  }
+  }*/
 
-  $('#logout').on('click', function() {
+  /*$('#logout').on('click', function() {
     $("#user").val('');
     $('#logout').hide();
     $('#login').hide();
     $('a[link="page_6"]').show();
     location.href = "?path=user/index";
-  });
+  });*/
 
 });

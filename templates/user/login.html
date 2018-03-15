@@ -1,0 +1,19 @@
+{% include 'header.html' %}
+<div id="user-login">
+  <h2>Форма входа</h2>
+  <br/>
+  <b>{{ content_data.msg }}</b>
+  <br/>
+  <form method="post">
+    Эл.почта: <input type="email" name="email" value=""/> <br/><br/>    
+    <input type="hidden" name="name" value="{{ user }}" id="user"/>
+    Пароль: <input type="password" name="password"/> <br/><br/>
+    <input type="submit"/>
+  </form>
+</div>
+<br/>
+<a href="?path=user/register">Зарегистрироваться</a>
+<br/>
+<hr/>
+{% include '/user/advantages.html' %}
+{% include 'footer.html' %}

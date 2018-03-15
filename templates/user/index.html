@@ -1,19 +1,60 @@
 {% include 'header.html' %}
-<div id="user-login">
-  <h2>Форма входа</h2>
+<div id="user-index">
+  <h2>Личный кабинет</h2>
   <br/>
-  <b>{{ msg }}</b>
+  <b>{{ content_data.msg }}</b>
   <br/>
+  
   <form method="post">
-    Эл.почта: <input type="email" name="email" value=""/> <br/><br/>    
-    <input type="hidden" name="name" value="{{ user }}" id="user"/>
-    Пароль: <input type="password" name="password"/> <br/><br/>
-    <input type="submit"/>
+    <fieldset>
+      <legend>Форма редактирования личных данных</legend>
+      Имя: <input type="text" name="name" value="{{ content_data.user }}"/> <br/><br/>
+      <input type="hidden" name="name" value="{{ user }}" id="user"/>
+      Эл.почта: <input type="email" name="email" value="{{ content_data.email }}"/> <br/><br/>
+      Телефон: <input type="tel" name="phone" value="{{ content_data.phone }}"/> <br/><br/>
+      Адрес: <br/><textarea rows="3" cols="50" name="address">{{ content_data.address }}</textarea> <br/><br/>
+      Пароль: <input type="password" name="password"/> <br/><br/>
+      Повторите пароль: <input type="password" name="passwordConfirm"/> <br/><br/>
+      <input type="submit"/>
+    </fieldset>
   </form>
+  <br/>
+  <hr/>
+  <h3>Мои заказы</h3>
+    <table border="1">
+      <tr>
+        <th>Номер</th>
+        <th>Сумма</th>
+        <th>Дата</th>
+        <th>Статус</th>
+      </tr>
+      {% for order, orders in content_data %}
+        {% for order in orders%}
+          <tr>
+            <td>{{ order.id_order }}</td>
+            <td><a href="?path=orders/{{ order.id_order }}/" link="{{ order.id_order }}" class="order-link">{{ order.amount }}</a></td>
+            <td>{{ order.datetime_create }}</td>
+            <td>{{ order.order_status_name }}</td>
+          </tr>
+        {% endfor %}
+      {% endfor %}
+    </table>
+
+  <br/>
+  <br/>
+  <hr/>
+  <h3>История просмотров</h3>
+  <br/>
+  <br/>
+  <hr/>
+  <h3>Мне нравится</h3>
+  <br/>
+  <br/>
+  <hr/>
+  <h3>Мои отзывы</h3>
+  <br/>
+  <br/>
+  <hr/>
 </div>
 <br/>
-<a href="?path=user/register">Зарегистрироваться</a>
-<br/>
-<hr/>
-{% include '/user/advantages.html' %}
 {% include 'footer.html' %}
