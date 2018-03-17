@@ -25,7 +25,8 @@ class UserController extends Controller
 	        $res = User::loginUser($email, $password);
 	        if (!$res) {
 	            $msg = 'Нет такого пользователя';
-	        } else {
+	        } else {	        	
+    					$this->title .= ' | Привет!';    	
 	        		$user = $res[0]['name'] ? $res[0]['name'] : null;
 	            $email = $res[0]['email'];
 	            $user_id = $res[0]['id_user'];
@@ -69,7 +70,8 @@ class UserController extends Controller
 	      			$res = User::searchUser($email);
 	      			if (!$res) {
 	            	$msg = 'Что-то пошло не так';
-	        		} else {
+	        		} else {	        			
+    						$this->title .= ' | Привет!';    	
 	        			$user = $res[0]['name'] ? $res[0]['name'] : null;
 	            	$email = $res[0]['email'];
 	            	$user_id = $res[0]['id_user'];
