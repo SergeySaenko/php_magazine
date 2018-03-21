@@ -35,6 +35,7 @@ class Order extends Model {
     return SQL::Instance()->Select(
       'SELECT * FROM orders 
       LEFT JOIN order_status ON orders.id_order_status = order_status.id_order_status
+      LEFT JOIN users ON orders.id_user = users.id_user
       ORDER BY orders.id_order',
       []);
   }

@@ -100,15 +100,10 @@ class AdminController extends Controller
 
     public function orders()
     {
-      //$user = Session::get('user');
-      //$role = Session::get('role');
-      //print_r($role);
-      //if($role = 0) {
-        $order = Order::getAllOrders();
 
-        return ['order' =>$order];
-      //} else {
-        //header('location: ?path=user/index');
-      //}
+      $order = Order::getAllOrders();
+      $status = OrderStatus::getAllOrderStatuses();
+
+      return ['order' =>$order, 'status' =>$status ];
     }
 }
