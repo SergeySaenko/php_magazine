@@ -12,12 +12,16 @@
       <th>Статус</th>
     </tr>
     {% for order in content_data['order'] %}
-      <tr>
+      <tr id="order_{{ order.id_order }}">
         <td>{{ order.id_order }}</td>
-        <td>{{ order.amount }}</td>
+        <td>
+          <a href="#" data="{{ order.id_order }}">
+            {{ order.amount }}
+          </a>
+        </td>
         <td>{{ order.name }}</td>
         <td>{{ order.email }}</td>
-        <td>{{ order.datetime_create }}</td>
+        <td>{{ order.datetime_create|date("H:i:s d.m.Y") }}</td>
         <td>
           <div class="dropdown">
             <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
@@ -26,11 +30,11 @@
             <div class="dropdown-menu">
                 {% for statuses in content_data['status'] %}
                   {% if order.order_status_name == statuses.order_status_name %}
-                    <a class="dropdown-item disabled" href="#">
+                    <a class="dropdown-item disabled" href="#" data="{{ order.id_order }}_{{ statuses.id_order_status }}">
                       {{ statuses.order_status_name }}
                     </a>
                   {% else %}
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" data="{{ order.id_order }}_{{ statuses.id_order_status }}">
                       {{ statuses.order_status_name }}
                     </a>
                   {% endif %}

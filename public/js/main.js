@@ -15,6 +15,27 @@ $(document).ready(function(){
     })
   });
 
+  $('.dropdown-item').on('click', function(){
+    var order = $(this).attr("data").split('_');
+    var idOrder = order[0];
+    var idStatus = order[1];
+    var myData = 'idOrder='+idOrder+'&idStatus='+idStatus;
+    
+
+    $.ajax({
+      url: "../../ajax/ajax.php",
+      type: "POST",
+      dataType: "text", // Тип данных
+      data: myData,
+      error: function() {alert("Что-то пошло не так в main.js");},
+      success: function(answer){
+        location.reload();
+        console.log("I cought you! "+answer);
+
+      }
+    })
+  });
+
   /*if( $("#user").val() ) {
     $('a[link="page_6"]').hide();
     var user = "Личный кабинет "+$("#user").val();
