@@ -11,34 +11,31 @@
       <th>Создан</th>
       <th>Статус</th>
     </tr>
-    {% for order, orders in content_data %}
-      {% for order in orders %}
-        <tr>
-          <td>{{ order.id_order }}</td>
-          <td>{{ order.amount }}</td>
-          <td>{{ order.name }}</td>
-          <td>{{ order.email }}</td>
-          <td>{{ order.datetime_create }}</td>
-          <td>
-            <div class="dropdown">
-              <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-                {{ order.order_status_name }}
-              </button>
-              <div class="dropdown-menu">
-              </div>
+    {% for order in content_data['order'] %}
+      <tr>
+        <td>{{ order.id_order }}</td>
+        <td>{{ order.amount }}</td>
+        <td>{{ order.name }}</td>
+        <td>{{ order.email }}</td>
+        <td>{{ order.datetime_create }}</td>
+        <td>
+          <div class="dropdown">
+            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+              {{ order.order_status_name }}
+            </button>
+            <div class="dropdown-menu">
+                {% for statuses in content_data['status'] %}
+                  <a class="dropdown-item" href="#">
+                    {{ statuses.order_status_name }}
+                  </a>
+                {% endfor %}
             </div>
-          </td>
-        </tr>
-      {% endfor %}
+          </div>
+        </td>
+      </tr>
     {% endfor %}
   </table>
   <br/>
   <br/>
-  <hr/>
-                {% for status, statuses in content_data %}
-                  {% for status in statuses %}
-                    <p>{{ status.id_order_status }} {{ status.order_status_name }}</p>                  
-                  {% endfor %}
-                {% endfor %}
 </div>
 {% include 'footer.html' %}
