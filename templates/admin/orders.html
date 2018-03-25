@@ -25,9 +25,15 @@
             </button>
             <div class="dropdown-menu">
                 {% for statuses in content_data['status'] %}
-                  <a class="dropdown-item" href="#">
-                    {{ statuses.order_status_name }}
-                  </a>
+                  {% if order.order_status_name == statuses.order_status_name %}
+                    <a class="dropdown-item disabled" href="#">
+                      {{ statuses.order_status_name }}
+                    </a>
+                  {% else %}
+                    <a class="dropdown-item" href="#">
+                      {{ statuses.order_status_name }}
+                    </a>
+                  {% endif %}
                 {% endfor %}
             </div>
           </div>
