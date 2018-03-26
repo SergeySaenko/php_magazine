@@ -20,7 +20,8 @@ $(document).ready(function(){
     var idOrder = order[0];
     var idStatus = order[1];
     var myData = 'idOrder='+idOrder+'&idStatus='+idStatus;
-    
+    var newValue = $(this).html();
+    var thisElement = $(this);
 
     $.ajax({
       url: "../../ajax/ajax.php",
@@ -29,9 +30,9 @@ $(document).ready(function(){
       data: myData,
       error: function() {alert("Что-то пошло не так в main.js");},
       success: function(answer){
-        location.reload();
-        console.log("I cought you! "+answer);
-
+        thisElement.siblings(".disabled").removeClass("disabled");
+        thisElement.addClass("dropdown-item disabled");
+        thisElement.parent().siblings("button").html(newValue);
       }
     })
   });
