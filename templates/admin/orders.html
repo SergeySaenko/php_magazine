@@ -12,10 +12,10 @@
       <th>Статус</th>
     </tr>
     {% for order in content_data['order'] %}
-      <tr id="order_{{ order.id_order }}">
+      <tr id="order_{{ order.id_order }}" class="order">
         <td>{{ order.id_order }}</td>
         <td>
-          <a href="#" data="{{ order.id_order }}">
+          <a href="#" data="{{ order.id_order }}_{{ statuses.id_order_status }}" class="amount">
             {{ order.amount }}
           </a>
         </td>

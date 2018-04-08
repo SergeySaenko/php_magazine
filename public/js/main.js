@@ -19,7 +19,7 @@ $(document).ready(function(){
     var order = $(this).attr("data").split('_');
     var idOrder = order[0];
     var idStatus = order[1];
-    var myData = 'idOrder='+idOrder+'&idStatus='+idStatus;
+    var myData = 'idOrder='+idOrder+'&idStatus='+idStatus+'&jqAction=changeStatus';
     var newValue = $(this).html();
     var thisElement = $(this);
 
@@ -33,6 +33,30 @@ $(document).ready(function(){
         thisElement.siblings(".disabled").removeClass("disabled");
         thisElement.addClass("dropdown-item disabled");
         thisElement.parent().siblings("button").html(newValue);
+      }
+    })
+  });
+  $('.amount').on('click', function(){
+    var order = $(this).attr("data").split('_');
+    var idOrder = order[0];
+    var myData = 'idOrder='+idOrder+'&jqAction=showDetails';
+    //var newValue = $(this).html();
+    var thisElement = $(this);
+    //console.log("Cought ya!");
+
+    $.ajax({
+      url: "../../ajax/ajax.php",
+      type: "POST",
+      dataType: "text", // Тип данных
+      data: myData,
+      error: function() {alert("Что-то пошло не так в main.js");},
+      success: function(answer){
+        //console.log("Got an answer!");
+        $("#admin-orders > h2").html("Заказ № "+idOrder);
+        thisElement.parent().parent().siblings(".order").hide();
+        //thisElement.siblings(".disabled").removeClass("disabled");
+        //thisElement.addClass("dropdown-item disabled");
+        //thisElement.parent().siblings("button").html(newValue);
       }
     })
   });
