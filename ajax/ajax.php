@@ -24,8 +24,6 @@ if($_POST['jqAction'] == 'showDetails') {
 		echo "Что-то пошло не так";
 	} else {
 		//console_log($_POST);
-		//$table = 'ordered_goods';
-		//$object = array( 'id_order_status' => $_POST['idStatus'] );
 		$orderId = $_POST['idOrder'];
 		$select = SQL::Instance()->Select(      
 			'SELECT * FROM ordered_goods 

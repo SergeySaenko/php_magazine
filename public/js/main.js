@@ -51,7 +51,7 @@ $(document).ready(function(){
       data: myData,
       error: function() {alert("Что-то пошло не так в main.js");},
       success: function(answer){
-        //console.log("Got an answer!");
+        console.log(answer);
         $("#admin-orders > h2").html("Заказ № "+idOrder);
         thisElement.parent().parent().siblings(".order").hide();
         //thisElement.siblings(".disabled").removeClass("disabled");
