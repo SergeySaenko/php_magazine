@@ -36,7 +36,7 @@ $(document).ready(function(){
       }
     })
   });
-  $('.amount').on('click', function(){
+  /*$('.amount').on('click', function(){
     var order = $(this).attr("data").split('_');
     var idOrder = order[0];
     var myData = 'idOrder='+idOrder+'&jqAction=showDetails';
@@ -59,7 +59,7 @@ $(document).ready(function(){
         //thisElement.parent().siblings("button").html(newValue);
       }
     })
-  });
+  });*/
 
   /*if( $("#user").val() ) {
     $('a[link="page_6"]').hide();

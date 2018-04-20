@@ -49,4 +49,14 @@ class Order extends Model {
       ORDER BY ordered_goods.id_order',
       ['id_order' => $id_order]);
   }
+
+  public static function getOrderId($id_order)
+  {
+    return SQL::Instance()->Select(
+      'SELECT * FROM orders 
+      LEFT JOIN order_status ON orders.id_order_status = order_status.id_order_status
+      WHERE id_order=:id_order 
+      ORDER BY orders.id_order',
+      ['id_order' => $id_order]);
+  }
 }

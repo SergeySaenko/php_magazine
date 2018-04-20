@@ -106,4 +106,13 @@ class AdminController extends Controller
 
       return ['order' =>$order, 'status' =>$status ];
     }
+
+    public function orderId($data)
+    {
+        $status = OrderStatus::getAllOrderStatuses();
+        $order = Order::getOrderId(isset($data['id']) ? $data['id'] : 0);
+        $orderedGoods = Order::getOrderedGoods(isset($data['id']) ? $data['id'] : 0);
+
+        return ['order' =>$order, 'status' =>$status, 'orderedGoods' => $orderedGoods];
+    }
 }

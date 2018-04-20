@@ -19,7 +19,7 @@ if($_POST['jqAction'] == 'changeStatus') {
 	}
 }
 
-if($_POST['jqAction'] == 'showDetails') {
+/*if($_POST['jqAction'] == 'showDetails') {
 	if ($_POST['idOrder'] == '') {
 		echo "Что-то пошло не так";
 	} else {
@@ -37,4 +37,4 @@ if($_POST['jqAction'] == 'showDetails') {
 			echo "Что-то пошло не так при обновлении";
 		}
 	}
-}
+}*/
