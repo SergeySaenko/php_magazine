@@ -1,0 +1,67 @@
+{% include 'header.html' %}
+<div id="admin-orders">
+  <h2>Заказ № {{ order.id_order }}</h2><br/><br/>
+  <input type="hidden" name="name" value="{{ user }}" id="user"/>
+  <table border="1">
+    <tr>
+      <th>Номер</th>
+      <th>Сумма</th>
+      <th>Имя</th>
+      <th>Эл.почта</th>
+      <th>Создан</th>
+      <th>Статус</th>
+    </tr>
+    {% for order in content_data['order'] %}
+      <tr id="order_{{ order.id_order }}" class="order">
+        <td>{{ order.id_order }}</td>
+        <td>
+          {{ order.amount }}
+        </td>
+        <td>{{ order.name }}</td>
+        <td>{{ order.email }}</td>
+        <td>{{ order.datetime_create|date("d.m.Y H:i:s") }}</td>
+        <td>
+          <div class="dropdown">
+            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+              {{ order.order_status_name }}
+            </button>
+            <div class="dropdown-menu">
+                {% for statuses in content_data['status'] %}
+                  {% if order.order_status_name == statuses.order_status_name %}
+                    <a class="dropdown-item disabled" href="#" data="{{ order.id_order }}_{{ statuses.id_order_status }}">
+                      {{ statuses.order_status_name }}
+                    </a>
+                  {% else %}
+                    <a class="dropdown-item" href="#" data="{{ order.id_order }}_{{ statuses.id_order_status }}">
+                      {{ statuses.order_status_name }}
+                    </a>
+                  {% endif %}
+                {% endfor %}
+            </div>
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+  <br/>
+  <table border="1">
+    <tr>
+      <th>Арт.</th>
+      <th>Название</th>
+      <th>Цена</th>
+      <th>Кол-во</th>
+      <th>Сумма</th>
+    </tr>
+    {% for order in content_data['orderedGoods'] %}
+      <tr>
+        <td>{{ orderedGoods.id_good }}</td>
+        <td>{{ orderedGoods.name }}</td>
+        <td>{{ orderedGoods.price }}</td>
+        <td>{{ orderedGoods.quantity }}</td>
+        <td>{{ orderedGoods.quantity * orderedGoods.price }}</td>
+      </tr>
+    {% endfor %}    
+  </table>
+  <br/>
+</div>
+{% include 'footer.html' %}
