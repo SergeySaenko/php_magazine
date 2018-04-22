@@ -1,17 +1,17 @@
 {% include 'header.html' %}
 <div id="admin-orders">
-  <h2>Заказ № {{ order.id_order }}</h2><br/><br/>
-  <input type="hidden" name="name" value="{{ user }}" id="user"/>
-  <table border="1">
-    <tr>
-      <th>Номер</th>
-      <th>Сумма</th>
-      <th>Имя</th>
-      <th>Эл.почта</th>
-      <th>Создан</th>
-      <th>Статус</th>
-    </tr>
-    {% for order in content_data['order'] %}
+  {% for order in content_data['order'] %}
+    <h2>Заказ № {{ order.id_order }}</h2><br/><br/>
+    <input type="hidden" name="name" value="{{ user }}" id="user"/>
+    <table border="1">
+      <tr>
+        <th>Номер</th>
+        <th>Сумма</th>
+        <th>Имя</th>
+        <th>Эл.почта</th>
+        <th>Создан</th>
+        <th>Статус</th>
+      </tr>
       <tr id="order_{{ order.id_order }}" class="order">
         <td>{{ order.id_order }}</td>
         <td>
@@ -41,9 +41,11 @@
           </div>
         </td>
       </tr>
-    {% endfor %}
-  </table>
+    </table>
+  {% endfor %}
   <br/>
+  <hr/>
+  <h3>Состав заказа</h3>
   <table border="1">
     <tr>
       <th>Арт.</th>
@@ -52,13 +54,13 @@
       <th>Кол-во</th>
       <th>Сумма</th>
     </tr>
-    {% for order in content_data['orderedGoods'] %}
+    {% for orderedGoods in content_data['orderedGoods'] %}
       <tr>
         <td>{{ orderedGoods.id_good }}</td>
         <td>{{ orderedGoods.name }}</td>
-        <td>{{ orderedGoods.price }}</td>
+        <td>{{ orderedGoods.price|round(2, 'common') }}</td>
         <td>{{ orderedGoods.quantity }}</td>
-        <td>{{ orderedGoods.quantity * orderedGoods.price }}</td>
+        <td>{{ (orderedGoods.quantity * orderedGoods.price)|round(2, 'common') }}</td>
       </tr>
     {% endfor %}    
   </table>
