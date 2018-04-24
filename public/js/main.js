@@ -33,6 +33,7 @@ $(document).ready(function(){
         thisElement.siblings(".disabled").removeClass("disabled");
         thisElement.addClass("dropdown-item disabled");
         thisElement.parent().siblings("button").html(newValue);
+        location.reload();
       }
     })
   });

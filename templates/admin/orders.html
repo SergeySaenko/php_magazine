@@ -1,50 +1,184 @@
 {% include 'header.html' %}
 <div id="admin-orders">
-  <h2>Заказы</h2><br/><br/>
-  <input type="hidden" name="name" value="{{ user }}" id="user"/>
-  <table border="1">
-    <tr>
-      <th>Номер</th>
-      <th>Сумма</th>
-      <th>Имя</th>
-      <th>Эл.почта</th>
-      <th>Создан</th>
-      <th>Статус</th>
-    </tr>
-    {% for order in content_data['order'] %}
-      <tr id="order_{{ order.id_order }}" class="order">
-        <td>{{ order.id_order }}</td>
-        <td>
-          <a href="?path=admin/orderId/{{ order.id_order }}" data="{{ order.id_order }}_{{ statuses.id_order_status }}" class="amount">
-            {{ order.amount }}
-          </a>
-        </td>
-        <td>{{ order.name }}</td>
-        <td>{{ order.email }}</td>
-        <td>{{ order.datetime_create|date("d.m.Y H:i:s") }}</td>
-        <td>
-          <div class="dropdown">
-            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-              {{ order.order_status_name }}
-            </button>
-            <div class="dropdown-menu">
-                {% for statuses in content_data['status'] %}
-                  {% if order.order_status_name == statuses.order_status_name %}
-                    <a class="dropdown-item disabled" href="#" data="{{ order.id_order }}_{{ statuses.id_order_status }}">
-                      {{ statuses.order_status_name }}
+  <div class="accordion" id="accordion">
+    <h2>Заказы</h2><br/><br/>
+    <input type="hidden" name="name" value="{{ user }}" id="user"/>    
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Заказы в работе
+          </button>
+        </h5>
+      </div>
+
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <table border="1">
+            <tr>
+              <th>Номер</th>
+              <th>Сумма</th>
+              <th>Имя</th>
+              <th>Эл.почта</th>
+              <th>Создан</th>
+              <th>Статус</th>
+            </tr>  
+            {% for order in content_data['order'] %}        
+              {% if order.id_order_status != 6 %}
+                <tr id="order_{{ order.id_order }}" class="order">
+                  <td>{{ order.id_order }}</td>
+                  <td>
+                    <a href="?path=admin/orderId/{{ order.id_order }}" data="{{ order.id_order }}_{{ statuses.id_order_status }}" class="amount">
+                      {{ order.amount }}
                     </a>
-                  {% else %}
-                    <a class="dropdown-item" href="#" data="{{ order.id_order }}_{{ statuses.id_order_status }}">
-                      {{ statuses.order_status_name }}
+                  </td>
+                  <td>{{ order.name }}</td>
+                  <td>{{ order.email }}</td>
+                  <td>{{ order.datetime_create|date("d.m.Y H:i:s") }}</td>
+                  <td>
+                    <div class="dropdown">
+                      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+                        {{ order.order_status_name }}
+                      </button>
+                      <div class="dropdown-menu">
+                          {% for statuses in content_data['status'] %}
+                            {% if order.order_status_name == statuses.order_status_name %}
+                              <a class="dropdown-item disabled" href="#" data="{{ order.id_order }}_{{ statuses.id_order_status }}">
+                                {{ statuses.order_status_name }}
+                              </a>
+                            {% else %}
+                              <a class="dropdown-item" href="#" data="{{ order.id_order }}_{{ statuses.id_order_status }}">
+                                {{ statuses.order_status_name }}
+                              </a>
+                            {% endif %}
+                          {% endfor %}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Все заказы
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body">
+          <table border="1">
+            <tr>
+              <th>Номер</th>
+              <th>Сумма</th>
+              <th>Имя</th>
+              <th>Эл.почта</th>
+              <th>Создан</th>
+              <th>Статус</th>
+            </tr>
+            {% for order in content_data['order'] %}
+              <tr id="order_{{ order.id_order }}" class="order">
+                <td>{{ order.id_order }}</td>
+                <td>
+                  <a href="?path=admin/orderId/{{ order.id_order }}" data="{{ order.id_order }}_{{ statuses.id_order_status }}" class="amount">
+                    {{ order.amount }}
+                  </a>
+                </td>
+                <td>{{ order.name }}</td>
+                <td>{{ order.email }}</td>
+                <td>{{ order.datetime_create|date("d.m.Y H:i:s") }}</td>
+                <td>
+                  <div class="dropdown">
+                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+                      {{ order.order_status_name }}
+                    </button>
+                    <div class="dropdown-menu">
+                        {% for statuses in content_data['status'] %}
+                          {% if order.order_status_name == statuses.order_status_name %}
+                            <a class="dropdown-item disabled" href="#" data="{{ order.id_order }}_{{ statuses.id_order_status }}">
+                              {{ statuses.order_status_name }}
+                            </a>
+                          {% else %}
+                            <a class="dropdown-item" href="#" data="{{ order.id_order }}_{{ statuses.id_order_status }}">
+                              {{ statuses.order_status_name }}
+                            </a>
+                          {% endif %}
+                        {% endfor %}
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Архив
+          </button>
+        </h5>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+        <div class="card-body">
+          <table border="1">
+            <tr>
+              <th>Номер</th>
+              <th>Сумма</th>
+              <th>Имя</th>
+              <th>Эл.почта</th>
+              <th>Создан</th>
+              <th>Статус</th>
+            </tr>  
+            {% for order in content_data['order'] %}        
+              {% if order.id_order_status == 6 %}
+                <tr id="order_{{ order.id_order }}" class="order">
+                  <td>{{ order.id_order }}</td>
+                  <td>
+                    <a href="?path=admin/orderId/{{ order.id_order }}" data="{{ order.id_order }}_{{ statuses.id_order_status }}" class="amount">
+                      {{ order.amount }}
                     </a>
-                  {% endif %}
-                {% endfor %}
-            </div>
-          </div>
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
+                  </td>
+                  <td>{{ order.name }}</td>
+                  <td>{{ order.email }}</td>
+                  <td>{{ order.datetime_create|date("d.m.Y H:i:s") }}</td>
+                  <td>
+                    <div class="dropdown">
+                      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+                        {{ order.order_status_name }}
+                      </button>
+                      <div class="dropdown-menu">
+                          {% for statuses in content_data['status'] %}
+                            {% if order.order_status_name == statuses.order_status_name %}
+                              <a class="dropdown-item disabled" href="#" data="{{ order.id_order }}_{{ statuses.id_order_status }}">
+                                {{ statuses.order_status_name }}
+                              </a>
+                            {% else %}
+                              <a class="dropdown-item" href="#" data="{{ order.id_order }}_{{ statuses.id_order_status }}">
+                                {{ statuses.order_status_name }}
+                              </a>
+                            {% endif %}
+                          {% endfor %}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <br/>
   <br/>
 </div>
