@@ -1,7 +1,9 @@
 {% include 'header.html' %}
 <div id="admin-orders">
   {% for order in content_data['order'] %}
-    <h2>Заказ № {{ order.id_order }}</h2><br/><br/>
+    <h2>Заказ № {{ order.id_order }}</h2>
+    <a href="?path=admin/orders">К списку заказов</a>
+    <br/><br/>
     <input type="hidden" name="name" value="{{ user }}" id="user"/>
     <table border="1">
       <tr>
