@@ -2,7 +2,7 @@
 <div id="catalog-data">
     <ul>
         {% for subcategory in content_data.subcategories %}
-        <li><a href="?path=categories/{{ subcategory.id_category }}">{{ subcategory.name }}</a></li>
+        <li><a href="?path=categories/{{ subcategory.id_category }}">{{ subcategory.category_name }}</a></li>
         {% endfor %}
     </ul>
 </div>
@@ -10,7 +10,7 @@
 <div id="goods-data">
     <ul>
         {% for good in content_data.goods %}
-        <li><a href="?path=categories/goods/{{ good.id_good }}/">{{ good.name }}</a></li>
+        <li><a href="?path=categories/goods/{{ good.id_good }}/">{{ good.good_name }}</a></li>
         {% endfor %}
     </ul>
 </div>

@@ -115,4 +115,12 @@ class AdminController extends Controller
 
         return ['order' =>$order, 'status' =>$status, 'orderedGoods' => $orderedGoods];
     }
+
+    public function goods()
+    {
+
+      $good = Good::getAllGoods();
+
+      return ['good' =>$good];
+    }
 }

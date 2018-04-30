@@ -30,7 +30,7 @@ class Good extends Model {
     public static function getGoods($categoryId)
     {
         return SQL::Instance()->Select(
-            'SELECT id_good, id_category, `name`, price FROM goods WHERE id_category = :category AND status=:status',
+            'SELECT id_good, id_category, good_name, price FROM goods WHERE id_category = :category AND status=:status',
             ['status' => Status::Active, 'category' => $categoryId]);
     }
 
@@ -46,5 +46,14 @@ class Good extends Model {
             ['id_good' => $id_good]);
 
         return (isset($result[0]) ? $result[0]['price'] : null);
+    }
+
+    public static function getAllGoods()
+    {
+        return SQL::Instance()->Select(
+            'SELECT * FROM goods 
+            LEFT JOIN categories ON goods.id_category = categories.id_category
+            ORDER BY goods.id_good',
+            []);
     }
 }

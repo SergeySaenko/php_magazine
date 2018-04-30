@@ -1,0 +1,33 @@
+{% include 'header.html' %}
+<div id="admin-goods">
+  
+    <h2>Товары</h2><br/><br/>
+    <input type="hidden" name="name" value="{{ user }}" id="user"/>    
+
+    <div>
+      <table border="1">
+        <tr>
+          <th>Id</th>
+          <th>Название</th>
+          <th>Категория</th>
+          <th>Цена</th>
+          <th>Статус</th>
+        </tr>  
+        {% for good in content_data.good %}
+          <tr id="good_{{ good.id_good }}" class="good">
+            <td>{{ good.id_good }}</td>
+            <td>{{ good.good_name }}</td>
+            <td>{{ good.category_name }}</td>
+            <td>{{ good.price|round(2, 'common') }}</td>
+            <td>{{ good.status }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  <br/>
+  <hr/>
+  <h3>Новый товар</h3>
+  <br/>
+  <br/>
+</div>
+{% include 'footer.html' %}

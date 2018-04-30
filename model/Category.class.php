@@ -18,7 +18,7 @@ class Category extends Model {
     public static function getCategories($parentId = 0)
     {
         return SQL::Instance()->Select(
-            'SELECT id_category, name FROM categories WHERE status=:status AND parent_id = :parent_id',
+            'SELECT id_category, category_name FROM categories WHERE status=:status AND parent_id = :parent_id',
             ['status' => Status::Active, 'parent_id' => $parentId]);
     }
 }

@@ -11,7 +11,7 @@
     		{% for category, categories in content_data %}
     			{% for category in categories%}
 	    			<li>
-	        		<a href="?path=categories/{{ category.id_category }}" link="{{ category.id_category }}" class="category-link">{{ category.name }}</a>
+	        		<a href="?path=categories/{{ category.id_category }}" link="{{ category.id_category }}" class="category-link">{{ category.category_name }}</a>
 	    			</li>
     			{% endfor %}
     		{% endfor %}

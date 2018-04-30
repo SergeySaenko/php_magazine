@@ -26,7 +26,7 @@ class Order extends Model {
       'SELECT * FROM orders 
       LEFT JOIN order_status ON orders.id_order_status = order_status.id_order_status
       WHERE id_user=:user_id 
-      ORDER BY orders.id_order',
+      ORDER BY orders.id_order DESC',
       ['user_id' => $user_id]);
   }
 
@@ -36,7 +36,7 @@ class Order extends Model {
       'SELECT * FROM orders 
       LEFT JOIN order_status ON orders.id_order_status = order_status.id_order_status
       LEFT JOIN users ON orders.id_user = users.id_user
-      ORDER BY orders.id_order',
+      ORDER BY orders.id_order DESC',
       []);
   }
 

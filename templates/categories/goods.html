@@ -1,7 +1,7 @@
 {% include 'header.html' %}
 
-<h1>{{ content_data.name }}</h1>
-<p>{{ content_data.price }}</p>
+<h1>{{ content_data.good_name }}</h1>
+<p>{{ content_data.price|round(2, 'common') }}</p>
 <button id='buyme' class='good_{{ content_data.id_good }}'>Купить</button>
 
 {% include 'footer.html' %}

@@ -59,7 +59,7 @@
     {% for orderedGoods in content_data['orderedGoods'] %}
       <tr>
         <td>{{ orderedGoods.id_good }}</td>
-        <td>{{ orderedGoods.name }}</td>
+        <td>{{ orderedGoods.good_name }}</td>
         <td>{{ orderedGoods.price|round(2, 'common') }}</td>
         <td>{{ orderedGoods.quantity }}</td>
         <td>{{ (orderedGoods.quantity * orderedGoods.price)|round(2, 'common') }}</td>
