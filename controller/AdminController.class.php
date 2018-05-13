@@ -120,7 +120,9 @@ class AdminController extends Controller
     {
 
       $good = Good::getAllGoods();
+      $category = Category::getAllSubcategories();
+      $collection = Collection::getAllCollections();
 
-      return ['good' =>$good];
+      return ['good' =>$good, 'category' =>$category, 'collection' =>$collection ];
     }
 }

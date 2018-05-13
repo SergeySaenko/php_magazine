@@ -19,7 +19,17 @@
             <td>{{ good.good_name }}</td>
             <td>{{ good.category_name }}</td>
             <td>{{ good.price|round(2, 'common') }}</td>
-            <td>{{ good.status }}</td>
+            <td>
+              {% if good.status == 0 %}
+                Удалено
+              {% elseif good.status == 1 %}
+                Купить
+              {% elseif good.status == 2 %}
+                Заказать
+              {% else %}
+                Ошибка
+              {% endif %}  
+            </td>
           </tr>
         {% endfor %}
       </table>
@@ -27,6 +37,57 @@
   <br/>
   <hr/>
   <h3>Новый товар</h3>
+    <form action="/action_page.php">
+      <div class="form-group">
+        <label for="good_name">Название товара:</label>
+        <input type="text" class="form-control" id="good_name">
+      </div>
+      <div class="form-group">
+        <label for="category_name">Категория товара:</label><br/>
+        <select class="custom-select" id="category_name">
+          <option selected>Выберите категорию товара</option>
+          {% for categories in content_data['category'] %}
+            <option value="{{ categories.id_category }}">{{ categories.category_name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="collection_name">Коллекция товара:</label><br/>
+        <select class="custom-select" id="collection_name">
+          <option selected>Выберите коллекцию товара</option>
+          {% for collections in content_data['collection'] %}
+            <option value="{{ collections.id_collection }}">{{ collections.collection_name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="status_name">Статус товара:</label><br/>
+        <select class="custom-select" id="status_name">
+          <option selected>Выберите статус товара</option>
+          <option value="0">Удалено</option>
+          <option value="1">Купить</option>
+          <option value="2">Заказать</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="description">Описание:</label><br/>
+        <textarea name="description" rows="10" class="form-control" id="description">
+        </textarea>
+      </div>
+      <div class="form-group">
+        <label for="size">Размер:</label><br/>
+        <textarea name="size" rows="5" class="form-control" id="size">
+        </textarea>
+      </div>
+      <div class="form-group">
+        <label for="price">Цена товара:</label>
+        <input type="text" class="form-control" id="price">
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox"> Remember me</label>
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
   <br/>
   <br/>
 </div>
