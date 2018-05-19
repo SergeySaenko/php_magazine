@@ -122,7 +122,8 @@ class AdminController extends Controller
       $good = Good::getAllGoods();
       $category = Category::getAllSubcategories();
       $collection = Collection::getAllCollections();
+      $material = Material::getAllMaterials();
 
-      return ['good' =>$good, 'category' =>$category, 'collection' =>$collection ];
+      return ['good' =>$good, 'category' =>$category, 'collection' =>$collection, 'material' =>$material ];
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 class Collection extends Model {
-    protected static $table = 'collection';
+    protected static $table = 'collections';
 
     protected static function setProperties()
     {

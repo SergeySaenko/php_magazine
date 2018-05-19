@@ -84,9 +84,19 @@
         <input type="text" class="form-control" id="price">
       </div>
       <div class="checkbox">
-        <label><input type="checkbox"> Remember me</label>
+        <fieldset>
+          <legend>Материалы:</legend>
+            {% for materials in content_data['material'] %}
+              <label><input type="checkbox"> {{ materials.material_name }}</label>
+            {% endfor %}
+        </fieldset>          
       </div>
-      <button type="submit" class="btn btn-default">Submit</button>
+      <div class="form-group">
+        <label for="exampleInputFile">Фото для загрузки:</label>
+        <input type="file" id="exampleInputFile" name="files[]" multiple="multiple">
+        <p class="help-block"><span class="label label-info">Note:</span> Please, Select the only images (.jpg, .jpeg, .png, .gif) to upload with the size of 100KB only.</p>
+      </div>
+      <button type="submit" class="btn btn-default" name="btnSubmit" >Создать</button>
     </form>
   <br/>
   <br/>
