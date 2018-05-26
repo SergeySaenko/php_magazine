@@ -3,10 +3,15 @@
 //**** Добавляем товар
 //***********************************************
 if (isset($_POST['add_submit'])) {
-	$LastId = SQL::Instance()->Select("SELECT id_good FROM goods ORDER BY id DESC LIMIT 1");
+	$lastId = SQL::Instance()->Select("SELECT id_good FROM goods ORDER BY id_good DESC LIMIT 1");
+	if (!$lastId) {
+		$nextId = 1;
+	}else{
+		$nextId = $lastId[0]['id_good'] + 1;
+	}
 	$category = $_POST['category'];
 	$collection = $_POST['collection'];
-	$code = $category + "-" + $collection + "-" + ($LastId + 1);
+	$code = $category . "-" . $collection . "-" . $nextId;
 	$name = $_POST['good_name']; 
 	$price = $_POST['price']; 
 	$size = $_POST['size']; 
@@ -15,14 +20,24 @@ if (isset($_POST['add_submit'])) {
 
 	$addNewProduct = SQL::Instance()->Insert("goods", array('id_good'=>null,
                                                           'good_code'=>$code,
-                                                          'good_name'=>$$name,
+                                                          'good_name'=>$name,
                                                           'price'=>$price,
                                                           'size'=>$size,
                                                           'description'=>$description,
                                                           'id_category'=>$category,
                                                           'id_collection'=>$collection,
                                                           'status'=>$status));
-
+	print_r($_POST['materials']);
+	if (isset($_POST['materials'])) {
+		$id_good = $addNewProduct;
+		foreach($_POST['materials'] as $key=>$value)
+		{
+			$id_material = $value;
+			$addAppliedMaterials = SQL::Instance()->Insert("applied_materials", array('id_applied_material'=>null,
+																																								'id_good'=>$id_good,
+																																								'id_material'=>$id_material));
+		}
+	}
 	
 /*
 

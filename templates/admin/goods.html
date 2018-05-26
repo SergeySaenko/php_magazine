@@ -37,7 +37,7 @@
   <br/>
   <hr/>
   <h3>Новый товар</h3>
-    <form action="/action_page.php">
+    <form method="post" enctype="multipart/form-data">
       <div class="container-fluid">
         <div class="row">
           <div class="form-group col-12">
@@ -59,7 +59,7 @@
               <fieldset>
                 <legend>Материалы:</legend>
                   {% for materials in content_data['material'] %}
-                    <label><input type="checkbox" name="material"> {{ materials.material_name }}</label>
+                    <label><input type="checkbox" name="materials[]" value="{{ materials.id_material }}"> {{ materials.material_name }}</label>
                   {% endfor %}
               </fieldset>          
             </div>
