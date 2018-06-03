@@ -27,7 +27,7 @@ if (isset($_POST['add_submit'])) {
                                                           'id_category'=>$category,
                                                           'id_collection'=>$collection,
                                                           'status'=>$status));
-	print_r($_POST['materials']);
+	//print_r($_POST['materials']);
 	if (isset($_POST['materials'])) {
 		$id_good = $addNewProduct;
 		foreach($_POST['materials'] as $key=>$value)
@@ -38,6 +38,15 @@ if (isset($_POST['add_submit'])) {
 																																								'id_material'=>$id_material));
 		}
 	}
+
+	if (isset($_FILES["files"])) {
+		$errors = array();
+		$extension = array("jpeg","jpg","png","gif");
+		$bytes = 1024;
+		$allowedKB = 3000;
+		$totalBytes = $allowedKB * $bytes;
+
+	}	
 	
 /*
 
