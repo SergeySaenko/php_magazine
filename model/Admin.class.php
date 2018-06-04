@@ -46,6 +46,33 @@ if (isset($_POST['add_submit'])) {
 		$allowedKB = 3000;
 		$totalBytes = $allowedKB * $bytes;
 
+		foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name)
+		{
+			$translate = new Translate();
+			$file_name = $translate->translate($_FILES["files"]["name"][$key]);
+			$file_tmp=$_FILES["files"]["tmp_name"][$key];
+			
+			$ext=pathinfo($file_name,PATHINFO_EXTENSION);
+
+			if(!in_array(strtolower($ext),$extension))
+			{
+				array_push($errors, "File type is invalid. Name:- ".$file_name);
+				$uploadThisFile = false;
+			}
+
+			if($_FILES["files"]["size"][$key] > $totalBytes){
+				array_push($errors, "File size must be less than 3MB. Name:- ".$file_name);
+				$uploadThisFile = false;
+			}
+
+			if(!file_exists("Upload/".$code."/"))
+			{
+				mkdir("Upload/".$code ."/", 0755);
+			}
+
+
+		}
+
 	}	
 	
 /*
