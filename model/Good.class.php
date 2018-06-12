@@ -53,6 +53,7 @@ class Good extends Model {
         return SQL::Instance()->Select(
             'SELECT * FROM goods 
             LEFT JOIN categories ON goods.id_category = categories.id_category
+            LEFT JOIN collections ON goods.id_collection = collections.id_collection
             ORDER BY goods.id_good',
             []);
     }
