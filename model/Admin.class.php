@@ -2,7 +2,8 @@
 //************************************************
 //**** Добавляем товар
 //***********************************************
-if (isset($_POST['add_submit'])) {
+if (isset($_POST['add_submit']))//добавляем товар 
+{
 	$lastId = SQL::Instance()->Select("SELECT id_good FROM goods ORDER BY id_good DESC LIMIT 1");
 	if (!$lastId) {
 		$nextId = 1;
@@ -28,7 +29,8 @@ if (isset($_POST['add_submit'])) {
                                                           'id_collection'=>$collection,
                                                           'status'=>$status));
 	//print_r($_POST['materials']);
-	if (isset($_POST['materials'])) {
+	if (isset($_POST['materials']))//заполняем табицу примененных материалов 
+	{
 		$id_good = $addNewProduct;
 		foreach($_POST['materials'] as $key=>$value)
 		{
@@ -39,113 +41,77 @@ if (isset($_POST['add_submit'])) {
 		}
 	}
 
-	if (isset($_FILES["files"])) {
+	if (isset($_FILES["files"]))//если выбраны файлы 
+	{
 		$errors = array();
 		$extension = array("jpeg","jpg","png","gif");
 		$bytes = 1024;
 		$allowedKB = 3000;
 		$totalBytes = $allowedKB * $bytes;
+		$queue = 0;
+		print_r(file_exists("public/upload/"));
+		
+		if(!file_exists("public/upload/".$code."/"))
+		{
+			mkdir("public/upload/".$code ."/", 0755);
+		} 
 
 		foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name)
 		{
 			$translate = new Translate();
-			$file_name = $translate->translate($_FILES["files"]["name"][$key]);
-			$file_tmp=$_FILES["files"]["tmp_name"][$key];
-			
-			$ext=pathinfo($file_name,PATHINFO_EXTENSION);
+			$file_tmp=$_FILES["files"]["tmp_name"][$key];			
+			$file_name = $translate->translate($file_tmp);
 
+			$imgPath = "public/upload/".$code."/".$file_name;// Путь куда сохраняем большое изображение
+			$thumbPath = "public/upload/".$code."/mini.".$file_name;// Путь куда сохраняем большое миниатюру
+
+			$ext=pathinfo($file_name,PATHINFO_EXTENSION);//определяем и проверяем тип файла
 			if(!in_array(strtolower($ext),$extension))
 			{
 				array_push($errors, "File type is invalid. Name:- ".$file_name);
 				$uploadThisFile = false;
 			}
 
-			if($_FILES["files"]["size"][$key] > $totalBytes){
+			if($_FILES["files"]["size"][$key] > $totalBytes)//проверяем размер файла
+			{
 				array_push($errors, "File size must be less than 3MB. Name:- ".$file_name);
 				$uploadThisFile = false;
 			}
 
-			if(!file_exists("Upload/".$code."/"))
+			if(file_exists($imgPath))//проверяем существует ли файл
 			{
-				mkdir("Upload/".$code ."/", 0755);
+				array_push($errors, "File is already exist. Name:- ". $file_name);
+				$uploadThisFile = false;
 			}
 
+			if($uploadThisFile)
+			{
+				if (copy($file_tmp, $imgPath)) 
+				{
+					$createThumb = new Thumbnail($imgPath, $thumbPath, '300', '300');
 
-		}
-
-	}	
-	
-/*
-
-	$interpretTo = new Translate();
-	$toLatName = $interpretTo->translate($_FILES['add_photo']['name']);
-	$photoSize = $_FILES['add_photo']['size'];
-
-	
-
-	/*Если записей в базе нет, то имя папки с изображениями будет 1
-	if (!$showIdLastProduct) {
-		$folderNameCreate = '1';
-	}else{
-		$folderNameCreate = $showIdLastProduct[0]['id'] + 1;
-	}
-
-	$savePath = "img/product/" .$folderNameCreate ."/" . $toLatName; // Путь куда сохраняем большое изображение
-	$saveThumb = "img/product/" .$folderNameCreate ."/mini." . $toLatName;
-
-	if (mkdir("v/assets/img/product/" .$folderNameCreate ."/", 0755)) {
-		if ($photoSize < 3000000 && $_FILES['add_photo']['type'] == 'image/jpeg' || $_FILES['add_photo']['type'] == 'image/gif' || $_FILES['add_photo']['type'] == 'image/png') {
-
-			if (copy($_FILES['add_photo']['tmp_name'], 'v/assets/'.$savePath)) {
-
-				$createThumb = new createThumbnail("v/assets/".$savePath, "v/assets/".$saveThumb, '300', '300');
-
-			if ($createThumb) {
-
-				$addNewProduct = SQL::Instance()->Insert("products_table", array('id'=>null,
-                                                                                  'name_mini'=>$prodNameMini,
-                                                                                  'name_full'=>$prodNameFull,
-                                                                                  'path_mini'=>$saveThumb,
-                                                                                  'path_full'=>$savePath,
-                                                                                  'description'=>$prodDescr,
-                                                                                  'price'=>$prodPrice,
-                                                                                  'see_counter'=>'0'));
-
-
-				if ($addNewProduct) {
-					echo $addNewProduct;
-
-					/* Если имя папки не совпадает с только что добавленным товаром(таблица очищена и id начинаются не с 1), то
-					переименовываем папку, чтобы имя совпадало с id, а так же делаем апдейт
-					базы изменив пути к изображениям 
-					if ($addNewProduct != $folderNameCreate) {
-
-						if (rename("v/assets/img/product/" .$folderNameCreate, "v/assets/img/product/" .$addNewProduct)) {
-
-							$folderNameCreate = $addNewProduct;
-							$savePath = "img/product/" .$folderNameCreate ."/" . $toLatName;
-							$saveThumb = "img/product/" .$folderNameCreate ."/mini." . $toLatName;
-                     $renameId = $addNewProduct;
-
-                            /*=== Делаем update записи ===
-                            $updateNewProductF = SQL::Instance()->Update("products_table", array('id'=>$renameId,
-                                                                                                 'name_mini'=>$prodNameMini,
-                                                                                                 'name_full'=>$prodNameFull,
-                                                                                                 'path_mini'=>$saveThumb,
-                                                                                                 'path_full'=>$savePath,
-                                                                                                 'description'=>$prodDescr,
-                                                                                                 'price'=>$prodPrice), "id='$renameId'");
-							if ($updateNewProductF) {
-								header("Location: " .ROOT ."manager/");
-							}
-						}
-					}else{
-						header("Location: " .ROOT ."manager/");
+					if ($createThumb) //вносим запись в таблицу картинки
+					{
+						$addNewImg = SQL::Instance()->Insert("images", array(
+							'id_image'=>null,
+		          'id_good'=>$addNewProduct,
+		          'image_name'=>$file_name,
+		          'queue'=>$queue));
+						$queue +=1;
 					}
-				}
+				}			
+			}	
+		}
+
+		$count = count($errors);
+
+		if($count != 0)
+		{
+			foreach($errors as $error)
+			{
+				echo $error."<br/>";
 			}
 		}
 	}
-}*/
-}
-			
+}	
+	
