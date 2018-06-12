@@ -1,7 +1,7 @@
 <?php
 
 class Translate{
-	private $translit = ['а' => 'a',
+	private $rusLatArray = ['а' => 'a',
 					  'б' => 'b',
 					  'в' => 'v',
 					  'г' => 'g',
@@ -34,12 +34,45 @@ class Translate{
 					  'э' => 'e',
 					  'ю' => 'yu',
 					  'я' => 'ya',
+					  'А' => 'A',
+					  'Б' => 'B',
+					  'В' => 'V',
+					  'Г' => 'G',
+					  'Д' => 'D',
+					  'Е' => 'E',
+					  'Ё' => 'E',
+					  'Ж' => 'Zh',
+					  'З' => 'Z',
+					  'И' => 'I',
+					  'Й' => 'J',
+					  'К' => 'K',
+					  'Л' => 'L',
+					  'М' => 'M',
+					  'Н' => 'N',
+					  'О' => 'O',
+					  'П' => 'P',
+					  'Р' => 'R',
+					  'С' => 'S',
+					  'Т' => 'T',
+					  'У' => 'U',
+					  'Ф' => 'F',
+					  'Х' => 'Kh',
+					  'Ц' => 'Ts',
+					  'Ч' => 'Ch',
+					  'Ш' => 'Sh',
+					  'Щ' => 'Ch\'',
+					  'Ъ' => '',
+					  'Ы' => 'Y',
+					  'Ь' => '\'',
+					  'Э' => 'E',
+					  'Ю' => 'Yu',
+					  'Я' => 'Ya',
 					  ' ' => ' '
 ];
 	function __construct() {}
 
 	public function translate($str){
-		$result = str_replace(" ", "_", strtr(mb_strtolower($str), $this->translit));
+		$result = str_replace(" ", "_", strtr($str, $this->rusLatArray));
 		return strtolower($result);
 	}
 }

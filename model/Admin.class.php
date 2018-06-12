@@ -49,21 +49,25 @@ if (isset($_POST['add_submit']))//добавляем товар
 		$allowedKB = 3000;
 		$totalBytes = $allowedKB * $bytes;
 		$queue = 0;
-		print_r(file_exists("public/upload/"));
+		//print_r(file_exists("../public/upload/"));
 		
-		if(!file_exists("public/upload/".$code."/"))
+		if(!file_exists("../public/upload/".$code."/"))
 		{
-			mkdir("public/upload/".$code ."/", 0755);
+			mkdir("../public/upload/".$code ."/", 0755);
 		} 
 
 		foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name)
 		{
-			$translate = new Translate();
-			$file_tmp=$_FILES["files"]["tmp_name"][$key];			
-			$file_name = $translate->translate($file_tmp);
+			$uploadThisFile = true;
 
-			$imgPath = "public/upload/".$code."/".$file_name;// Путь куда сохраняем большое изображение
-			$thumbPath = "public/upload/".$code."/mini.".$file_name;// Путь куда сохраняем большое миниатюру
+			$transLate = new Translate();
+			$file_name = $_FILES["files"]["name"][$key];
+			print_r($file_name."<br/>");
+			$file_tmp = $_FILES["files"]["tmp_name"][$key];			
+			$file_name = $transLate->translate($file_name);
+			print_r($file_name."<br/>");
+			$imgPath = "../public/upload/".$code."/".$file_name;// Путь куда сохраняем большое изображение
+			$thumbPath = "../public/upload/".$code."/mini.".$file_name;// Путь куда сохраняем большое миниатюру
 
 			$ext=pathinfo($file_name,PATHINFO_EXTENSION);//определяем и проверяем тип файла
 			if(!in_array(strtolower($ext),$extension))
