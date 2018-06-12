@@ -110,5 +110,29 @@ class SQL{
       $res->execute($params);
       return $res;
   }
+
+   /*
+   * Начало транзакции
+   */
+  public function beginTA()
+  {
+      $this->db->beginTransaction();
+  }
+
+   /*
+   * Окончание транзакции
+   */
+  public function commitTA()
+  {
+      $this->db->commit();
+  }
+
+   /*
+   * Откат транзакции
+   */
+  public function rollBackTA()
+  {
+      $this->db->rollBack();
+  }
 }
 ?>
