@@ -118,7 +118,7 @@ class AdminController extends Controller
 
     public function goods()
     {
-
+      include_once '../model/Admin.class.php';
       $good = Good::getAllGoods();
       $category = Category::getAllSubcategories();
       $collection = Collection::getAllCollections();

@@ -37,29 +37,29 @@
   <br/>
   <hr/>
   <h3>Новый товар</h3>
-    <form action="/action_page.php">
+    <form method="post" enctype="multipart/form-data">
       <div class="container-fluid">
         <div class="row">
           <div class="form-group col-12">
             <label for="good_name">Название товара:</label>
-            <input type="text" class="form-control" id="good_name">
+            <input type="text" class="form-control" id="good_name" name="good_name" required>
           </div>
           <div class="col-8">
             <div class="form-group">
               <label for="description">Описание:</label><br/>
-              <textarea name="description" rows="10" class="form-control" id="description">
+              <textarea name="description" rows="10" class="form-control" id="description" name="description" required>
               </textarea>
             </div>            
             <div class="form-group">
               <label for="size">Размер:</label><br/>
-              <textarea name="size" rows="5" class="form-control" id="size">
+              <textarea name="size" rows="5" class="form-control" id="size" name="size">
               </textarea>
             </div>
             <div class="checkbox">
               <fieldset>
                 <legend>Материалы:</legend>
                   {% for materials in content_data['material'] %}
-                    <label><input type="checkbox"> {{ materials.material_name }}</label>
+                    <label><input type="checkbox" name="materials[]" value="{{ materials.id_material }}"> {{ materials.material_name }}</label>
                   {% endfor %}
               </fieldset>          
             </div>
@@ -67,8 +67,8 @@
           <div class="col-4">
             <div class="form-group">
               <label for="category_name">Категория товара:</label><br/>
-              <select class="custom-select" id="category_name">
-                <option selected>Выберите категорию товара</option>
+              <select class="custom-select" id="category_name" name="category" required>
+                <option value="0" disabled selected>Выберите категорию товара</option>
                 {% for categories in content_data['category'] %}
                   <option value="{{ categories.id_category }}">{{ categories.category_name }}</option>
                 {% endfor %}
@@ -76,8 +76,8 @@
             </div>            
             <div class="form-group">
               <label for="collection_name">Коллекция товара:</label><br/>
-              <select class="custom-select" id="collection_name">
-                <option selected>Выберите коллекцию товара</option>
+              <select class="custom-select" id="collection_name" name="collection">
+                <option value="0" selected>Выберите коллекцию товара</option>
                 {% for collections in content_data['collection'] %}
                   <option value="{{ collections.id_collection }}">{{ collections.collection_name }}</option>
                 {% endfor %}
@@ -85,8 +85,8 @@
             </div>
             <div class="form-group">
               <label for="status_name">Статус товара:</label><br/>
-              <select class="custom-select" id="status_name">
-                <option selected>Выберите статус товара</option>
+              <select class="custom-select" id="status_name" name="status" required>
+                <option selected disabled>Выберите статус товара</option>
                 <option value="0">Удалено</option>
                 <option value="1">Купить</option>
                 <option value="2">Заказать</option>
@@ -94,14 +94,14 @@
             </div>
             <div class="form-group">
               <label for="price">Цена товара:</label>
-              <input type="text" class="form-control" id="price">
+              <input type="text" class="form-control" id="price" name="price">
             </div>
             <div class="form-group">
               <label for="exampleInputFile">Фото для загрузки:</label>
               <input type="file" id="exampleInputFile" name="files[]" multiple="multiple">
               <p class="help-block"><span class="label label-info">Note:</span> Please, Select the only images (.jpg, .jpeg, .png, .gif) to upload with the size of 100KB only.</p>
             </div>
-            <button type="submit" class="btn btn-default" name="btnSubmit" >Создать</button>
+            <button type="submit" class="btn btn-default" name="add_submit" >Создать</button>
           </div>
 
 
