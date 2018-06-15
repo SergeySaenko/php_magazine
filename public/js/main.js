@@ -37,6 +37,28 @@ $(document).ready(function(){
       }
     })
   });
+
+  $('.delete-item').on('click', function(){
+    var good = $(this).attr("data").split('_');
+    var idGood = good[1];//остановился здесь))
+    var myData = 'idOrder='+idOrder+'&idStatus='+idStatus+'&jqAction=changeStatus';
+    var newValue = $(this).html();
+    var thisElement = $(this);
+
+    $.ajax({
+      url: "../../ajax/ajax.php",
+      type: "POST",
+      dataType: "text", // Тип данных
+      data: myData,
+      error: function() {alert("Что-то пошло не так в main.js");},
+      success: function(answer){
+        thisElement.siblings(".disabled").removeClass("disabled");
+        thisElement.addClass("dropdown-item disabled");
+        thisElement.parent().siblings("button").html(newValue);
+        location.reload();
+      }
+    })
+  });
   /*$('.amount').on('click', function(){
     var order = $(this).attr("data").split('_');
     var idOrder = order[0];

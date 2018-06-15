@@ -10,18 +10,22 @@
           <th>Id</th>
           <th>Название</th>
           <th>Категория</th>
+          <th>Коллекция</th>
           <th>Цена</th>
           <th>Статус</th>
+          <th>Изменить</th>
+          <th>Удалить</th>
         </tr>  
         {% for good in content_data.good %}
           <tr id="good_{{ good.id_good }}" class="good">
             <td>{{ good.id_good }}</td>
             <td>{{ good.good_name }}</td>
             <td>{{ good.category_name }}</td>
+            <td>{{ good.collection_name }}</td>
             <td>{{ good.price|round(2, 'common') }}</td>
             <td>
               {% if good.status == 0 %}
-                Удалено
+                Скрыто
               {% elseif good.status == 1 %}
                 Купить
               {% elseif good.status == 2 %}
@@ -29,6 +33,12 @@
               {% else %}
                 Ошибка
               {% endif %}  
+            </td>
+            <td>
+              <a class="edit-item" href="?path=admin/goodId/{{ good.id_good }}"> / </a>
+            </td>
+            <td>
+              <a class="delete-item" href="#" data="delete_{{ good.id_good }}"> X </a>
             </td>
           </tr>
         {% endfor %}
