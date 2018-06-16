@@ -41,8 +41,7 @@ $(document).ready(function(){
   $('.delete-item').on('click', function(){
     var good = $(this).attr("data").split('_');
     var idGood = good[1];//остановился здесь))
-    var myData = 'idOrder='+idOrder+'&idStatus='+idStatus+'&jqAction=changeStatus';
-    var newValue = $(this).html();
+    var myData = 'idGood='+idGood+'&jqAction=deleteGood';
     var thisElement = $(this);
 
     $.ajax({
@@ -52,10 +51,8 @@ $(document).ready(function(){
       data: myData,
       error: function() {alert("Что-то пошло не так в main.js");},
       success: function(answer){
-        thisElement.siblings(".disabled").removeClass("disabled");
-        thisElement.addClass("dropdown-item disabled");
-        thisElement.parent().siblings("button").html(newValue);
-        location.reload();
+        thisElement.parent().remove();
+        //location.reload();
       }
     })
   });

@@ -19,6 +19,21 @@ if($_POST['jqAction'] == 'changeStatus') {
 	}
 }
 
+if($_POST['jqAction'] == 'deleteGood') {
+	if ($_POST['idGood'] == '') {
+		echo "Что-то пошло не так";
+	} else {
+		$table = 'goods';
+		$goodId = $_POST['idGood'];
+		$delete = SQL::Instance()->Delete( $table, "id_good='$goodId'" );
+		if ($delete) {
+			echo "Товар удален)";
+		}else{
+			echo "Что-то пошло не так при удалении(";
+		}
+	}
+}
+
 /*if($_POST['jqAction'] == 'showDetails') {
 	if ($_POST['idOrder'] == '') {
 		echo "Что-то пошло не так";
