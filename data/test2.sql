@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 03 2018 г., 23:30
+-- Время создания: Июл 06 2018 г., 20:42
 -- Версия сервера: 5.6.38
 -- Версия PHP: 5.5.38
 
@@ -42,7 +42,18 @@ INSERT INTO `applied_materials` (`id_applied_material`, `id_good`, `id_material`
 (1, 13, 3),
 (2, 14, 3),
 (3, 15, 1),
-(4, 15, 3);
+(4, 15, 3),
+(5, 16, 5),
+(6, 16, 3),
+(7, 24, 1),
+(8, 26, 1),
+(9, 27, 1),
+(10, 27, 3),
+(11, 28, 6),
+(12, 29, 3),
+(13, 30, 1),
+(14, 31, 5),
+(15, 31, 3);
 
 -- --------------------------------------------------------
 
@@ -91,7 +102,8 @@ CREATE TABLE `collections` (
 --
 
 INSERT INTO `collections` (`id_collection`, `collection_name`, `collection_description`, `season`, `collection_status`) VALUES
-(1, 'Натуральная кожа 2018', 'Коллекция эксклюзивных украшений из кожи Лето 2018.', 'summer', 1);
+(1, 'Натуральная кожа 2018', 'Коллекция эксклюзивных украшений из кожи Лето 2018.', 'summer', 1),
+(2, 'Кораллы 2018', 'Коллекция эксклюзивных украшений из кораллов Лето 2018.', 'summer', 1);
 
 -- --------------------------------------------------------
 
@@ -130,7 +142,23 @@ INSERT INTO `goods` (`id_good`, `good_code`, `good_name`, `price`, `size`, `desc
 (12, '5-1-12', 'wsx', 345, 'rfv', 'edc', 5, 1, 2),
 (13, '8-1-13', 'xsw', 654, 'vfr', 'cde', 8, 1, 0),
 (14, '5-1-14', 'qaz', 345, '234', '123', 5, 1, 2),
-(15, '5-0-15', 'cde', 654, '              ', 'vfr', 5, 0, 1);
+(15, '5-0-15', 'cde', 654, '              ', 'vfr', 5, 0, 1),
+(16, '7-1-16', 'zxcQEW', 7845, 'zsdrgzsdrfgZSRFg    ', 'ZSRDGFZSRGFZSDXFGVZXFGZsdrGF', 7, 1, 1),
+(17, '6-0-17', 'zxcQEW1', 4587, 'SfgSFG', 'ZSfgSDGf', 6, 0, 2),
+(18, '5-1-18', 'zxcQEW2', 654, 'SDEFgSDg', 'SDfS', 5, 1, 0),
+(19, '2-1-19', 'zxcQEW3', 785, 'segf', 'asergsrg', 2, 1, 1),
+(20, '3-1-20', 'sfsdfSDf5', 654, 'sedgFsg', 'ZSsdEGsg', 3, 1, 2),
+(21, '5-1-21', 'aesfa', 1214, 'gSXDFgvXFbv  ', 'asdefasgd', 5, 1, 1),
+(22, '6-1-22', 'qw', 741, 'rt ', 'er', 6, 1, 0),
+(23, '9-1-23', 'zxc4', 1412, '789  ', '123', 9, 1, 2),
+(24, '3-1-24', 'qqeqwe23', 8798, 'Маленький', 'Бижа', 3, 1, 1),
+(25, '7-1-25', 'sfsdfSDf34', 2345, 'xsw   ', 'wer   ', 7, 1, 1),
+(26, '7-1-26', '1we34', 852, '              ', 'q2we34    ', 7, 1, 1),
+(27, '8-0-27', 'sfsdfSDf121', 12141, '              ', '2wsde3  ', 8, 0, 1),
+(28, '7-1-28', 'qqeqwe32', 459, '              ', '12wsde34', 7, 1, 1),
+(29, '9-0-29', 'swed', 345, '              ', 'dews', 9, 0, 1),
+(30, '5-1-30', 'xsw123', 1414, '              ', '12werdfd34        ', 5, 1, 1),
+(31, '7-2-31', 'sfsdf5Df', 12141, '15134rasdvxzdftq3456taerg', 'sdfgzsdfgbSF', 7, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -144,6 +172,18 @@ CREATE TABLE `images` (
   `image_name` text NOT NULL,
   `queue` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `images`
+--
+
+INSERT INTO `images` (`id_image`, `id_good`, `image_name`, `queue`) VALUES
+(1, 29, 'house.jpg', 0),
+(2, 29, 'rain.jpg', 1),
+(3, 30, 'rain.jpg', 0),
+(4, 30, 'volna.jpg', 1),
+(5, 31, 'volna.jpg', 0),
+(6, 31, 'dozhd\'.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -413,7 +453,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `applied_materials`
 --
 ALTER TABLE `applied_materials`
-  MODIFY `id_applied_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_applied_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `categories`
@@ -425,19 +465,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблицы `collections`
 --
 ALTER TABLE `collections`
-  MODIFY `id_collection` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_collection` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `goods`
 --
 ALTER TABLE `goods`
-  MODIFY `id_good` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_good` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT для таблицы `images`
 --
 ALTER TABLE `images`
-  MODIFY `id_image` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_image` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `materials`
