@@ -1,6 +1,7 @@
 <?php
 include_once '../configuration/config.default.php';
 include_once '../lib/SQL.class.php';
+include_once '../lib/Folder.class.php';
 
 if($_POST['jqAction'] == 'changeStatus') {
 	if ($_POST['idOrder'] == '' || $_POST['idStatus'] == '') {
@@ -23,12 +24,29 @@ if($_POST['jqAction'] == 'deleteGood') {
 	if ($_POST['idGood'] == '') {
 		echo "Что-то пошло не так";
 	} else {
-		$table = 'goods';
 		$goodId = $_POST['idGood'];
-		$delete = SQL::Instance()->Delete( $table, "id_good='$goodId'" );
+		$code = SQL::Instance()->Select(
+			'SELECT good_code FROM goods WHERE id_good = :good LIMIT 1',
+      ['good' => $goodId]);
+		$code = $code[0]['good_code'];
+		$folder = "../public/upload/".$code;
+		$delete = SQL::Instance()->Delete( 'goods', "id_good='$goodId'" );
+		$img = SQL::Instance()->Select(
+			'SELECT id_image FROM images WHERE id_good = :good',
+      ['good' => $goodId]);
+		if($img) {
+			$deleteImg = SQL::Instance()->Delete( 'images', "id_good='$goodId'" );
+			$removeFolder = Folder::Delete($folder);
+		}
+		$materials =  SQL::Instance()->Select(
+			'SELECT id_applied_material FROM applied_materials WHERE id_good = :good',
+      ['good' => $goodId]);
+		if($materials) {
+			$deleteMaterials = SQL::Instance()->Delete( 'applied_materials', "id_good='$goodId'" );
+		}
 		if ($delete) {
-			echo "Товар удален)";
-		}else{
+			echo ("Товар ".$code." удален)");
+		} else {
 			echo "Что-то пошло не так при удалении(";
 		}
 	}

@@ -23,7 +23,7 @@ if (isset($_POST['add_submit']))//добавляем товар
 		$description = $_POST['description']; 
 		$status = $_POST['status']; 
 
-		$addNewProduct = SQL::Instance()->Insert("goods", array('id_good'=>null,
+		$addNewProduct = SQL::Instance()->Insert("goods", array('id_good'=>$nextId,
 	                                                          'good_code'=>$code,
 	                                                          'good_name'=>$name,
 	                                                          'price'=>$price,
@@ -35,7 +35,7 @@ if (isset($_POST['add_submit']))//добавляем товар
 		//print_r($_POST['materials']);
 		if (isset($_POST['materials']))//заполняем табицу примененных материалов 
 		{
-			$id_good = $addNewProduct;
+			$id_good = $nextId;
 			foreach($_POST['materials'] as $key=>$value)
 			{
 				$id_material = $value;
@@ -100,7 +100,7 @@ if (isset($_POST['add_submit']))//добавляем товар
 						{
 							$addNewImg = SQL::Instance()->Insert("images", array(
 								'id_image'=>null,
-			          'id_good'=>$addNewProduct,
+			          'id_good'=>$nextId,
 			          'image_name'=>$file_name,
 			          'queue'=>$queue));
 							$queue +=1;

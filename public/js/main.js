@@ -40,7 +40,7 @@ $(document).ready(function(){
 
   $('.delete-item').on('click', function(){
     var good = $(this).attr("data").split('_');
-    var idGood = good[1];//остановился здесь))
+    var idGood = good[1];
     var myData = 'idGood='+idGood+'&jqAction=deleteGood';
     var thisElement = $(this);
 
@@ -51,8 +51,8 @@ $(document).ready(function(){
       data: myData,
       error: function() {alert("Что-то пошло не так в main.js");},
       success: function(answer){
-        thisElement.parent().remove();
-        //location.reload();
+        thisElement.parent().parent().remove();
+        console.log(answer);
       }
     })
   });
