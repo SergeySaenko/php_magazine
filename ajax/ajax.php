@@ -21,6 +21,10 @@ if($_POST['jqAction'] == 'changeStatus') {
 }
 
 if($_POST['jqAction'] == 'deleteGood') {
+	try
+	{
+		SQL::Instance()->beginTA();
+
 	if ($_POST['idGood'] == '') {
 		echo "Что-то пошло не так";
 	} else {
@@ -49,6 +53,13 @@ if($_POST['jqAction'] == 'deleteGood') {
 		} else {
 			echo "Что-то пошло не так при удалении(";
 		}
+	}
+	
+	SQL::Instance()->commitTA();
+	} 
+	catch (Exception $e) {
+	SQL::Instance()->rollBackTA();
+  echo "Ошибка: " . $e->getMessage();
 	}
 }
 
