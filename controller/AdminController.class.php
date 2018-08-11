@@ -126,4 +126,15 @@ class AdminController extends Controller
 
       return ['good' =>$good, 'category' =>$category, 'collection' =>$collection, 'material' =>$material ];
     }
+
+    public function goodId($data)
+    {
+      include_once '../model/Admin.class.php';
+      $goodId = Good::getGoodId(isset($data['id']) ? $data['id'] : 0);
+      $category = Category::getAllSubcategories();
+      $collection = Collection::getAllCollections();
+      $material = Material::getAllMaterials();
+
+      return ['goodId' =>$goodId, 'category' =>$category, 'collection' =>$collection, 'material' =>$material ];
+    }
 }

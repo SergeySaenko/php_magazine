@@ -57,4 +57,17 @@ class Good extends Model {
             ORDER BY goods.id_good',
             []);
     }
+
+    public static function getGoodId($id_good)
+    {
+        return SQL::Instance()->Select(
+            'SELECT * FROM goods 
+            LEFT JOIN categories ON goods.id_category = categories.id_category
+            LEFT JOIN collections ON goods.id_collection = collections.id_collection
+            LEFT JOIN applied_materials ON goods.id_good = applied_materials.id_good
+            LEFT JOIN images ON goods.id_good = images.id_good
+            WHERE id_good = :id_good
+            LIMIT 1',
+            ['id_good' => $id_good]);
+    }
 }
